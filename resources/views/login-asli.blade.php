@@ -1,115 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login</title>
-  <!-- CSS -->
-  <link rel="stylesheet" href="src/output.css">
-
-  <!-- Font Poppins -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-  <!-- Remix Icon -->
-  <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet"/>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/landing.css', 'resources/js/frontend.js'])
+    <link rel="shortcut icon" href="{{ asset('/assets/vellum-logo.svg') }}" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet" />
 </head>
 
-<body class="bg-[#F5F5F5] font-[Poppins] min-h-screen flex items-center justify-center p-4">
-
-  <!-- Container -->
-  <div class="w-full max-w-6xl bg-white rounded-[30px] p-5 flex gap-5 shadow-lg">
-
-    <!-- LEFT SIDE -->
-    <div class="group w-1/2 hover:w-[55%] transition-all duration-500 min-h-[760px] relative rounded-[30px] overflow-hidden animate-left">
-
-      <!-- Gradient -->
-      <div class="absolute inset-0 bg-gradient-to-br from-[#D7D0FF] via-[#6D4CFF] to-[#FF6B2C]"></div>
-
-      <!-- Blur -->
-      <div class="absolute top-[-100px] left-[-100px] w-[300px] h-[300px] bg-white/40 rounded-full blur-3xl"></div>
-
-      <div class="absolute bottom-[-120px] right-[-120px] w-[350px] h-[350px] bg-orange-300/40 rounded-full blur-3xl"></div>
-
-      <!-- Content -->
-      <div class="relative h-full flex flex-col justify-between p-10 text-white">
-
-        <!-- Logo -->
-        <div class="text-7xl font-light">
-            <img src="assets/Logo.png" alt="PaySen Logo" class="h-20 object-contain">
+<body class="h-screen p-5 font-[Poppins] min-h-screen flex items-center justify-center overflow-y-auto">
+    <div
+        class="group w-1/2 hover:w-[55%] transition-all duration-500 h-full relative rounded-[30px] overflow-hidden animate-left hidden lg:block">
+        <div class="absolute inset-0">
+            <img src="{{ asset('/assets/sign-in-bg.png') }}" alt="Login Background" class="h-full w-full">
         </div>
+        <div class="relative h-full flex flex-col justify-between p-6 text-white">
+            <div class="text-6xl font-light">
+                <img src="{{ asset('/assets/vellum-logo.svg') }}" alt="Vellum Logo" class="h-20 object-contain">
+            </div>
+            <div>
+                <h1 class="text-4xl font-black leading-tight mb-2">Welcome back!</h1>
+                <p class="text-lg tracking-tight font-light">Create an account to get started <br> and explore more,</p>
+            </div>
 
-        <!-- Text -->
-        <div>
-          <h1 class="text-5xl font-bold leading-tight mb-4">Welcome back!</h1>
-
-          <p class="text-lg font-light leading-relaxed">Create an account to get started <br> and explore more,</p>
         </div>
-      </div>
     </div>
 
-    <!-- RIGHT SIDE -->
-    <div class="w-1/2 hover:w-[55%] transition-all duration-500 flex items-center justify-center px-16 animate-right">
+    <div
+        class="w-full lg:w-1/2 lg:hover:w-[55%] transition-all duration-500 flex items-center justify-center px-6 lg:px-16 animate-right">
 
-      <div class="w-full max-w-md">
+        <div class="w-full max-w-lg">
+            <div class="text-center mb-10">
+                <h2 class="text-4xl font-bold text-[#333] mb-3">Glad to see you again!</h2>
+                <p class="text-gray-400 text-lg">Create an account to get started
+                    and explore more.</p>
+            </div>
 
-        <!-- Heading -->
-        <div class="mb-10">
-          <h2 class="text-5xl font-bold text-[#333] leading-tight mb-3">Glad to see you again!</h2>
+            <form class="w-full max-w-lg" action="{{ route('register') }}" method="POST">
+                @csrf
+                <div class="mb-5">
+                    <label class="block mb-2">Email</label>
+                    <input type="email" id="email" name="email" placeholder="email@gmail.com" required
+                        class="input-field w-full pl-10 pr-12 py-3 rounded-xl border border-gray-200 bg-gray-50/50 text-gray-900 text-sm placeholder-gray-400 transition-all duration-200 hover:border-blue-300 focus:border-primary focus:bg-white">
+                </div>
+                <div class="mb-5">
+                    <div class="flex items-center justify-between mb-1.5">
+                        <label for="password" class="block text-sm font-600 text-gray-700">Password</label>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-3.5 flex items-center pointer-events-none">
+                            <i class="ri-lock-2-line text-gray-400"></i>
+                        </div>
+                        <input type="password" id="password" name="password" placeholder="Input password" required
+                            autocomplete="current-password"
+                            class="input-field w-full pl-10 pr-12 py-3 rounded-xl border border-gray-200 bg-gray-50/50 text-gray-900 text-sm placeholder-gray-400 transition-all duration-200 hover:border-blue-300 focus:border-primary focus:bg-white">
+                        <button type="button" onclick="togglePassword('password', this)"
+                            class="absolute inset-y-0 right-3.5 flex items-center text-gray-400 hover:text-gray-600 transition-colors">
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <button type="submit" class="bg-primary text-white px-4 py-3 rounded-lg w-full">
+                    Login
+                </button>
 
-          <p class="text-gray-400 text-lg">Welcome to Vellum! Really glad you choose us!</p>
+                <p class="text-gray-400 text-center mt-4">Don't have an account? <a href="{{ route('register') }}"
+                        class="text-primary font-medium">Login</a></p>
+            </form>
         </div>
-
-        <!-- Form -->
-        <form class="space-y-5 id=loginForm">
-
-          <!-- Email -->
-          <div>
-            <label class="block mb-2 text-lg font-semibold text-[#444]">Email</label>
-
-            <input type="email"placeholder="Enter your email"class="w-full h-[60px] px-5 rounded-2xl border-2 border-gray-200 outline-none focus:border-[#6D4CFF] transition">
-          </div>
-
-          <!-- Password -->
-          <div>
-            <label class="block mb-2 text-lg font-semibold text-[#444]">Password</label>
-
-            <input type="password"placeholder="Enter your email"class="w-full h-[60px] px-5 rounded-2xl border-2 border-gray-200 outline-none focus:border-[#6D4CFF] transition">
-          </div>
-
-          <!-- Forgot Password -->
-          <div class="flex justify-end">
-            <a href="#" class="text-sm text-gray-400 hover:text-[#6D4CFF] transition">Forgot Password?</a>
-          </div>
-
-          <!-- Button -->
-          <button class="w-full h-[60px] rounded-2xl bg-[#6D4CFF] text-white text-xl font-semibold hover:scale-[1.03] transition duration-300 shadow-lg animate-glow">
-            Login
-          </button>
-
-        </form>
-
-        <!-- Signup -->
-        <p class="text-center text-sm text-gray-400 mt-5">
-          Don't have an account?
-          <a href="#" class="text-[#6D4CFF] font-medium">Sign Up!</a>
-        </p>
-      </div>
     </div>
-  </div>
 
-  <!-- JS -->
-  <script>
-    const loginForm = document.getElementById("loginForm");
-  
-    loginForm.addEventListener("submit", function(e) {
-      e.preventDefault();
-  
-      localStorage.setItem("isLogin", "true");
-  
-      window.location.href = "./home.html";
-    });
-  </script> 
+    <script>
+        function togglePassword(fieldId, btn) {
+            const input = document.getElementById(fieldId);
+            input.type = input.type === 'password' ? 'text' : 'password';
+        }
+    </script>
+
 </body>
+
 </html>
