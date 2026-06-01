@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Category</title>
-
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet" />
-    <link rel="stylesheet" href="src/output.css">
-
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Category | Vellum</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/landing.css', 'resources/js/frontend.js'])
+    <link rel="shortcut icon" href="{{ asset('/assets/vellum-logo.svg') }}" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet" />
 </head>
+
 <body class="bg-white">
     <!-- navigation -->
     <div class="flex h-screen min-w-0">
@@ -17,7 +22,7 @@
             class="hidden w-64 bg-white rounded-4xl md:flex flex-col justify-between p-6 text-primary shrink-0">
             <div>
                 <div class="flex items-center justify-center gap-2 px-3 py-4 mb-8">
-                    <img src="assets/vellum-logo.png" alt="Vellum logo"
+                    <img src="{{ asset('assets/vellum-logo.png') }}" alt="Vellum logo"
                         class="h-10 bg-primary p-1 rounded-lg">
                     <span class="font-bold text-xl uppercase tracking-wide">Vellum.</span>
                 </div>
@@ -53,6 +58,7 @@
                 <!-- Background image -->
                 <img src="{{ asset('/assets/sign-in-bg.png') }}" alt="Login Background"
                     class="absolute inset-0 w-full h-full object-cover">
+
 
                 <!-- Konten -->
                 <div class="relative z-10 flex flex-col gap-3">
@@ -91,14 +97,14 @@
             <header class="flex items-center justify-between px-4 py-4 bg-white">
                 <!-- Search Bar -->
                 <div class="relative w-full">
-                     <!-- <span class="absolute inset-y-0 left-3 flex items-center text-gray-400">
+                    <!-- <span class="absolute inset-y-0 left-3 flex items-center text-gray-400">
                         <i class="ri-search-line"></i>
                     </span> -->
                     <input type="text" placeholder="Search Here"
                         class="w-full py-4 px-8 bg-gray-50 text-sm text-gray-600 rounded-full border-none focus:outline-none placeholder:text-gray-400 placeholder:text-sm">
                 </div>
 
-                 <!-- <div class="flex items-center gap-6">
+                <!-- <div class="flex items-center gap-6">
                     <div class="flex items-center gap-2">
                         <span class="text-sm font-semibold text-gray-700">Queenshafa</span>
                         <div
@@ -113,101 +119,170 @@
                 </div> -->
             </header>
 
-            <main class="flex-1 flex flex-col overflow-auto">
-            <!-- Folders -->
-            <div class="mx-6">
-            <div class="flex justify-between items-start mb-6">
-            <div>
-                <h1 class="text-2xl font-semibold capitalize text-black">Dashboard</h1>
-                <span class="text-sm text-gray-400">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</span>
-            </div>
-            <div>
-                <button class="bg-primary">+ New Category</button>
-            </div>
-            </div>
+            <main class="flex-1 flex flex-col overflow-hidden">
+                <div class="relative overflow-hidden shrink-0 rounded-tl-[3rem]" style="height: 220px;">
+                    <img src="{{ asset('/assets/sign-in-bg.png') }}" alt="Dashboard Background"
+                        class="absolute inset-0 w-full h-full object-cover">
 
-            <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-3 mb-8">
-            <!-- folder 1 -->
-            <div class="bg-white rounded-lg shadow-sm py-4 px-2 flex items-center gap-4 border border-gray-300">
-                <div class="w-12 h-12 rounded-full bg-[#CDC4FE] flex items-center justify-center shrink-0">
-                    <i class="ri-folders-line w-8 h-8 justify-center text-[#6346EE]"></i>
+                    <div class="relative z-10 flex justify-between items-start h-full px-10 pb-8 mt-16">
+                        <div>
+                            <h1 class="text-3xl font-semibold text-white mb-1">Categories</h1>
+                            <p class="text-white/80 text-sm tracking-tight">Let's capture your thoughts and stay on top
+                                of everything.</p>
+                        </div>
+                        <a href="#"
+                            class="self-start mt-1 inline-flex items-center gap-1.5 px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/80 transition">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 4v16m8-8H4" />
+                            </svg>
+                            Add Category
+                        </a>
+                    </div>
                 </div>
-                <div>
-                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-[#CDC4FE] text-[#6346EE]">3 notes</span>
-                    <p class="text-l text-gray-800 font-medium">Study</p>
-                    <p class="text-xs font-normal text-black">Lorem, ipsum dolor sit amet consectetur adipisicing elit</p>
-                </div>
-                <div>
-                    <i class="ri-more-2-fill ml-120 font-bold"></i>
-                </div>
-            </div>
 
-            <!-- folder 2 -->
-            <div class="bg-white rounded-lg shadow-sm py-4 px-2 flex items-center gap-4 border border-gray-300">
-                <div class="w-12 h-12 rounded-full bg-[#C8EAD6] flex items-center justify-center shrink-0">
-                    <i class="ri-folders-line w-8 h-8 justify-center text-[#39B76A]"></i>
-                </div>
-                <div>
-                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-[#C8EAD6] text-[#39B76A]">3 notes</span>
-                    <p class="text-l text-gray-800 font-medium">Work</p>
-                    <p class="text-xs font-normal text-black">Lorem, ipsum dolor sit amet consectetur adipisicing elit</p>
-                </div>
-                <div>
-                    <i class="ri-more-2-fill ml-120 font-bold"></i>
-                </div>
-            </div>
+                <div
+                    class="flex-1 flex flex-col bg-white rounded-tl-[3rem] -mt-12 relative z-10 border border-gray-200 overflow-hidden">
+                    <div class="flex-1 overflow-y-auto px-10 pt-8 pb-8">
+                        <div class="flex flex-col gap-3">
+                            {{-- Folder 1 --}}
+                            <div
+                                class="bg-white rounded-xl shadow-sm py-4 px-6 flex items-center justify-between gap-4 border border-gray-300">
+                                <div
+                                    class="w-12 h-12 rounded-xl bg-primary/30 flex items-center justify-center shrink-0 border border-primary">
+                                    <i class="ri-folders-line text-xl text-primary"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm text-gray-800 font-medium">Study</p>
+                                    <p class="text-xs text-gray-400">3 Notes</p>
+                                </div>
+                                <a href="#"
+                                    class="inline-flex items-center gap-1.5 px-2 py-1 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/80 transition">
+                                    <i class="ri-arrow-right-line text-xl"></i>
+                                </a>
+                            </div>
+                            {{-- Folder 2 --}}
+                            <div
+                                class="bg-white rounded-xl shadow-sm py-4 px-6 flex items-center justify-between gap-4 border border-gray-300">
+                                <div
+                                    class="w-12 h-12 rounded-xl bg-primary/30 flex items-center justify-center shrink-0 border border-primary">
+                                    <i class="ri-folders-line text-xl text-primary"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm text-gray-800 font-medium">Travelling</p>
+                                    <p class="text-xs text-gray-400">5 Notes</p>
+                                </div>
+                                <a href="#"
+                                    class="inline-flex items-center gap-1.5 px-2 py-1 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/80 transition">
+                                    <i class="ri-arrow-right-line text-xl"></i>
+                                </a>
+                            </div>
+                            {{-- Folder 3 --}}
+                            <div
+                                class="bg-white rounded-xl shadow-sm py-4 px-6 flex items-center justify-between gap-4 border border-gray-300">
+                                <div
+                                    class="w-12 h-12 rounded-xl bg-primary/30 flex items-center justify-center shrink-0 border border-primary">
+                                    <i class="ri-folders-line text-xl text-primary"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm text-gray-800 font-medium">Work</p>
+                                    <p class="text-xs text-gray-400">8 Notes</p>
+                                </div>
+                                <a href="#"
+                                    class="inline-flex items-center gap-1.5 px-2 py-1 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/80 transition">
+                                    <i class="ri-arrow-right-line text-xl"></i>
+                                </a>
+                            </div>
+                            {{-- Folder 4 --}}
+                            <div
+                                class="bg-white rounded-xl shadow-sm py-4 px-6 flex items-center justify-between gap-4 border border-gray-300">
+                                <div
+                                    class="w-12 h-12 rounded-xl bg-primary/30 flex items-center justify-center shrink-0 border border-primary">
+                                    <i class="ri-folders-line text-xl text-primary"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm text-gray-800 font-medium">Personal</p>
+                                    <p class="text-xs text-gray-400">2 Notes</p>
+                                </div>
+                                <a href="#"
+                                    class="inline-flex items-center gap-1.5 px-2 py-1 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/80 transition">
+                                    <i class="ri-arrow-right-line text-xl"></i>
+                                </a>
+                            </div>
+                            {{-- Folder 5 --}}
+                            <div
+                                class="bg-white rounded-xl shadow-sm py-4 px-6 flex items-center justify-between gap-4 border border-gray-300">
+                                <div
+                                    class="w-12 h-12 rounded-xl bg-primary/30 flex items-center justify-center shrink-0 border border-primary">
+                                    <i class="ri-folders-line text-xl text-primary"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm text-gray-800 font-medium">Movie Review</p>
+                                    <p class="text-xs text-gray-400">4 Notes</p>
+                                </div>
+                                <a href="#"
+                                    class="inline-flex items-center gap-1.5 px-2 py-1 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/80 transition">
+                                    <i class="ri-arrow-right-line text-xl"></i>
+                                </a>
+                            </div>
+                            {{-- Folder 6 --}}
+                            <div
+                                class="bg-white rounded-xl shadow-sm py-4 px-6 flex items-center justify-between gap-4 border border-gray-300">
+                                <div
+                                    class="w-12 h-12 rounded-xl bg-primary/30 flex items-center justify-center shrink-0 border border-primary">
+                                    <i class="ri-folders-line text-xl text-primary"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm text-gray-800 font-medium">Groceries</p>
+                                    <p class="text-xs text-gray-400">1 Note</p>
+                                </div>
+                                <a href="#"
+                                    class="inline-flex items-center gap-1.5 px-2 py-1 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/80 transition">
+                                    <i class="ri-arrow-right-line text-xl"></i>
+                                </a>
+                            </div>
+                            {{-- Folder 7 --}}
+                            <div
+                                class="bg-white rounded-xl shadow-sm py-4 px-6 flex items-center justify-between gap-4 border border-gray-300">
+                                <div
+                                    class="w-12 h-12 rounded-xl bg-primary/30 flex items-center justify-center shrink-0 border border-primary">
+                                    <i class="ri-folders-line text-xl text-primary"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm text-gray-800 font-medium">Journal</p>
+                                    <p class="text-xs text-gray-400">6 Notes</p>
+                                </div>
+                                <a href="#"
+                                    class="inline-flex items-center gap-1.5 px-2 py-1 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/80 transition">
+                                    <i class="ri-arrow-right-line text-xl"></i>
+                                </a>
+                            </div>
+                            {{-- Folder 8 --}}
+                            <div
+                                class="bg-white rounded-xl shadow-sm py-4 px-6 flex items-center justify-between gap-4 border border-gray-300">
+                                <div
+                                    class="w-12 h-12 rounded-xl bg-primary/30 flex items-center justify-center shrink-0 border border-primary">
+                                    <i class="ri-folders-line text-xl text-primary"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm text-gray-800 font-medium">Recipes</p>
+                                    <p class="text-xs text-gray-400">7 Notes</p>
+                                </div>
+                                <a href="#"
+                                    class="inline-flex items-center gap-1.5 px-2 py-1 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/80 transition">
+                                    <i class="ri-arrow-right-line text-xl"></i>
+                                </a>
+                            </div>
 
-            <!-- folder 3 -->
-            <div class="bg-white rounded-lg shadow-sm py-4 px-2 flex items-center gap-4 border border-gray-300">
-                <div class="w-12 h-12 rounded-full bg-[#FDE1ED] flex items-center justify-center shrink-0">
-                    <i class="ri-folders-line w-8 h-8 justify-center text-[#FC95BF]"></i>
-                </div>
-                <div>
-                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-[#FDE1ED] text-[#FC95BF]">3 notes</span>
-                    <p class="text-l text-gray-800 font-medium">Personal</p>
-                    <p class="text-xs font-normal text-black">Lorem, ipsum dolor sit amet consectetur adipisicing elit</p>
-                </div>
-                <div>
-                    <i class="ri-more-2-fill ml-120 font-bold"></i>
-                </div>
-            </div>
+                        </div>
+                    </div>
 
-            <!-- folder 4 -->
-            <div class="bg-white rounded-lg shadow-sm py-4 px-2 flex items-center gap-4 border border-gray-300">
-                <div class="w-12 h-12 rounded-full bg-[#FEF9E1] flex items-center justify-center shrink-0">
-                    <i class="ri-folders-line w-8 h-8 justify-center text-[#FDCF25]"></i>
                 </div>
-                <div>
-                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-[#FEF9E1] text-[#FDCF25]">3 notes</span>
-                    <p class="text-l text-gray-800 font-medium">Ideas</p>
-                    <p class="text-xs font-normal text-black">Lorem, ipsum dolor sit amet consectetur adipisicing elit</p>
-                </div>
-                <div>
-                    <i class="ri-more-2-fill ml-120 font-bold"></i>
-                </div>
-            </div>
-
-            <!-- folder 5 -->
-            <div class="bg-white rounded-lg shadow-sm py-4 px-2 flex items-center gap-4 border border-gray-300">
-                <div class="w-12 h-12 rounded-full bg-[#CDC4FE] flex items-center justify-center shrink-0">
-                    <i class="ri-folders-line w-8 h-8 justify-center text-[#6346EE]"></i>
-                </div>
-                <div>
-                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-[#CDC4FE] text-[#6346EE]">3 notes</span>
-                    <p class="text-l text-gray-800 font-medium">Sleep</p>
-                    <p class="text-xs font-normal text-black">Lorem, ipsum dolor sit amet consectetur adipisicing elit</p>
-                </div>
-                <div>
-                    <i class="ri-more-2-fill ml-120 font-bold"></i>
-                </div>
-            </div>
-
-            </div>
-            </div>
 
             </main>
         </div>
     </div>
 
 </body>
+
 </html>
