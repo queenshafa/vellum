@@ -97,14 +97,14 @@
             <header class="flex items-center justify-between px-4 py-4 bg-white">
                 <!-- Search Bar -->
                 <div class="relative w-full">
-                    {{-- <span class="absolute inset-y-0 left-3 flex items-center text-gray-400">
+                    <span class="absolute inset-y-0 left-3 flex items-center text-gray-400">
                         <i class="ri-search-line"></i>
-                    </span> --}}
+                    </span>
                     <input type="text" placeholder="Search Here"
                         class="w-full py-4 px-8 bg-gray-50 text-sm text-gray-600 rounded-full border-none focus:outline-none placeholder:text-gray-400 placeholder:text-sm">
                 </div>
 
-                {{-- <div class="flex items-center gap-6">
+                <div class="flex items-center gap-6">
                     <div class="flex items-center gap-2">
                         <span class="text-sm font-semibold text-gray-700">Queenshafa</span>
                         <div
@@ -115,7 +115,7 @@
 
                     <button class="text-[#FF7A00] relative p-1 hover:scale-105 transition-transform">
                         <i class="ri-notification-2-line text-lg"></i>
-                </div> --}}
+                </div>
             </header>
             <main class="flex-1 flex flex-col overflow-hidden">
 
