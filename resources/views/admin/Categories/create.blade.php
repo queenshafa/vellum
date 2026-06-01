@@ -126,223 +126,114 @@
                         class="absolute inset-0 w-full h-full object-cover">
 
                     <div class="relative z-10 flex justify-between items-start h-full px-10 pb-8 mt-16">
-
-
                         <div>
-
-                            <!-- back to study -->
-                            <a href="#"
-                                class="inline-flex items-center text-xs font-medium text-white hover:text-gray-600 mb-4 transition-colors">
-                                <i class="ri-arrow-left-s-line w-3.5 h-3.5 mr-1"></i>Back to Study
-                            </a>
-                            <h1 class="text-3xl font-semibold text-white mb-1">Hiya, Queenshafa! 👋</h1>
+                            <h1 class="text-3xl font-semibold text-white mb-1">Create a new note</h1>
                             <p class="text-white/80 text-sm tracking-tight">Let's capture your thoughts and stay on top
                                 of everything.</p>
                         </div>
-                        <span
-                            class="self-start bg-white/10 backdrop-blur-md border border-white/30 rounded-full py-2 px-5">
-                            <p class="text-sm text-white font-medium">
-                                <i class="ri-calendar-line text-white/80 text-sm"></i> {{ now()->format('l, d M Y') }}
-                            </p>
-                        </span>
+                        <a href="#"
+                            class="self-start mt-1 inline-flex items-center gap-1.5 px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/80 transition">
+                            Cancel
+                        </a>
                     </div>
                 </div>
 
                 <!-- Konten putih — tidak scroll -->
                 <div
                     class="flex-1 flex flex-col bg-white rounded-tl-[3rem] -mt-12 relative z-10 border border-gray-200 px-4 overflow-hidden">
-                    <div class="mx-6 mt-10">
-                        <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-3 mb-8">
-                            <!-- folder 1 -->
-                            <div
-                                class="bg-white rounded-lg shadow-sm py-4 px-2 flex items-center gap-4 border border-gray-300">
-                                <div
-                                    class="w-12 h-12 rounded-full bg-primary/30 flex items-center justify-center shrink-0">
-                                    <i class="ri-folders-line w-8 h-8 justify-center text-[#6346EE]"></i>
-                                </div>
-                                <div>
-                                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-[#CDC4FE] text-[#6346EE]">3
-                                        notes</span>
-                                    <p class="text-l text-gray-800 font-medium">Study</p>
-                                    <p class="text-xs font-normal text-black">Lorem, ipsum dolor sit amet consectetur
-                                        adipisicing elit</p>
-                                </div>
-                                <div>
-                                    <i class="ri-more-2-fill ml-120 font-bold"></i>
-                                </div>
-                            </div>
-
-                            <!-- folder 2 -->
-                            <div
-                                class="bg-white rounded-lg shadow-sm py-4 px-2 flex items-center gap-4 border border-gray-300">
-                                <div
-                                    class="w-12 h-12 rounded-full bg-[#C8EAD6] flex items-center justify-center shrink-0">
-                                    <i class="ri-folders-line w-8 h-8 justify-center text-[#39B76A]"></i>
-                                </div>
-                                <div>
-                                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-[#C8EAD6] text-[#39B76A]">3
-                                        notes</span>
-                                    <p class="text-l text-gray-800 font-medium">Work</p>
-                                    <p class="text-xs font-normal text-black">Lorem, ipsum dolor sit amet consectetur
-                                        adipisicing elit</p>
-                                </div>
-                                <div>
-                                    <i class="ri-more-2-fill ml-120 font-bold"></i>
-                                </div>
-                            </div>
-
-                            <!-- folder 3 -->
-                            <div
-                                class="bg-white rounded-lg shadow-sm py-4 px-2 flex items-center gap-4 border border-gray-300">
-                                <div
-                                    class="w-12 h-12 rounded-full bg-[#FDE1ED] flex items-center justify-center shrink-0">
-                                    <i class="ri-folders-line w-8 h-8 justify-center text-[#FC95BF]"></i>
-                                </div>
-                                <div>
-                                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-[#FDE1ED] text-[#FC95BF]">3
-                                        notes</span>
-                                    <p class="text-l text-gray-800 font-medium">Personal</p>
-                                    <p class="text-xs font-normal text-black">Lorem, ipsum dolor sit amet consectetur
-                                        adipisicing elit</p>
-                                </div>
-                                <div>
-                                    <i class="ri-more-2-fill ml-120 font-bold"></i>
-                                </div>
-                            </div>
-
-                            <!-- folder 4 -->
-                            <div
-                                class="bg-white rounded-lg shadow-sm py-4 px-2 flex items-center gap-4 border border-gray-300">
-                                <div
-                                    class="w-12 h-12 rounded-full bg-[#FEF9E1] flex items-center justify-center shrink-0">
-                                    <i class="ri-folders-line w-8 h-8 justify-center text-[#FDCF25]"></i>
-                                </div>
-                                <div>
-                                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-[#FEF9E1] text-[#FDCF25]">3
-                                        notes</span>
-                                    <p class="text-l text-gray-800 font-medium">Ideas</p>
-                                    <p class="text-xs font-normal text-black">Lorem, ipsum dolor sit amet consectetur
-                                        adipisicing elit</p>
-                                </div>
-                                <div>
-                                    <i class="ri-more-2-fill ml-120 font-bold"></i>
-                                </div>
-                            </div>
-
-                            <!-- folder 5 -->
-                            <div
-                                class="bg-white rounded-lg shadow-sm py-4 px-2 flex items-center gap-4 border border-gray-300">
-                                <div
-                                    class="w-12 h-12 rounded-full bg-[#CDC4FE] flex items-center justify-center shrink-0">
-                                    <i class="ri-folders-line w-8 h-8 justify-center text-[#6346EE]"></i>
-                                </div>
-                                <div>
-                                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-[#CDC4FE] text-[#6346EE]">3
-                                        notes</span>
-                                    <p class="text-l text-gray-800 font-medium">Sleep</p>
-                                    <p class="text-xs font-normal text-black">Lorem, ipsum dolor sit amet consectetur
-                                        adipisicing elit</p>
-                                </div>
-                                <div>
-                                    <i class="ri-more-2-fill ml-120 font-bold"></i>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="w-full max-w-5xl">
-
-
-
-                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 space-y-6">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h1 class="text-xl font-bold text-gray-900">Create New Note</h1>
-                                <p class="text-xs text-gray-400 mt-0.5">Add a new note to your category</p>
-                            </div>
-                            <button
-                                class="px-5 py-2 text-xs font-semibold text-gray-700 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-50 transition-colors">Cancel</button>
-                        </div>
-
+                    <div class="overflow-y-auto flex-1 px-8 py-8">
                         <form class="space-y-5">
+                            @csrf
 
-                            <!-- pilih category -->
+                            <!-- Pilih Category -->
                             <div class="space-y-2">
-                                <label class="block text-xs font-bold text-gray-900">Category</label>
+                                <label class="text-xl font-semibold capitalize text-black shrink-0">Category</label>
                                 <div class="relative">
-                                    <button
-                                        class="w-full flex items-center justify-between px-4 py-2.5 bg-white border border-gray-200 rounded-xl text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50/50 text-left focus:outline-none focus:border-purple-400">
-                                        <div class="flex items-center gap-3">
-                                            <div
-                                                class="w-7 h-7 rounded-lg bg-[#E2CEFC] flex items-center justify-center text-[#7A5CFA]">
-                                                <i class="ri-folders-line w-8 h-8 justify-center text-primary"></i>
-                                            </div>
-                                            <span>Study</span>
+                                    <div class="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+                                        <div class="w-7 h-7 rounded-lg bg-[#E2CEFC] flex items-center justify-center">
+                                            <i class="ri-folders-line text-primary text-lg"></i>
                                         </div>
-                                        <i class="ri-arrow-down-wide-line text-gray-800"></i>
-                                    </button>
+                                    </div>
+                                    <select
+                                        class="w-full pl-14 pr-10 py-2.5 bg-white border border-gray-200 rounded-xl text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50/50 focus:outline-none focus:border-purple-400 appearance-none cursor-pointer">
+                                        <option value="">Choose category...</option>
+                                        <option value="study">Study</option>
+                                        <option value="travelling">Travelling</option>
+                                        <option value="work">Work</option>
+                                        <option value="personal">Personal</option>
+                                        <option value="movie-review">Movie Review</option>
+                                        <option value="groceries">Groceries</option>
+                                    </select>
                                 </div>
                             </div>
 
-                            <!-- title -->
+                            <!-- Note Title -->
                             <div class="space-y-2">
                                 <div class="flex justify-between items-center">
-                                    <label class="block text-xs font-bold text-gray-900">Note Title</label>
-                                    <span class="text-[11px] text-gray-400 font-medium">0/100</span>
+                                    <label class="text-xl font-semibold capitalize text-black shrink-0">Note
+                                        Title</label>
+                                    <span class="text-[11px] text-gray-400 font-medium" id="titleCount">0/100</span>
                                 </div>
-                                <input type="text" placeholder="Enter note title..."
+                                <input type="text" id="noteTitle" maxlength="100"
+                                    placeholder="Enter note title..."
+                                    oninput="document.getElementById('titleCount').textContent = this.value.length + '/100'"
                                     class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl text-sm text-gray-800 placeholder:text-gray-300 shadow-sm focus:outline-none focus:border-purple-400 transition-colors">
                             </div>
 
-                            <!-- note content -->
+                            <!-- Note Content -->
                             <div class="space-y-2">
-                                <label class="block text-xs font-bold text-gray-900">Note Content</label>
+                                <label class="text-xl font-semibold capitalize text-black shrink-0">Note
+                                    Content</label>
                                 <div
-                                    class="border border-gray-200 rounded-xl overflow-hidden shadow-sm focus-within:border-purple-400 transition-colors">
-
-                                    <!-- tool -->
+                                    class="border-2 border-gray-100 rounded-xl overflow-hidden shadow-sm focus-within:border-primary transition-colors">
+                                    <!-- Toolbar -->
                                     <div
                                         class="flex items-center gap-4 px-4 py-2 bg-white border-b border-gray-100 text-gray-400 text-sm">
-                                        <button
-                                            class="font-bold hover:text-gray-700 transition-colors px-1 text-base"><i
-                                                class="ri-bold"></i></button>
-                                        <button
-                                            class="italic hover:text-gray-700 transition-colors px-1 text-base font-serif"><i
-                                                class="ri-italic"></i></button>
-                                        <button class="hover:text-gray-700 transition-colors px-1 text-base"><i
-                                                class="ri-underline"></i></button>
-
+                                        <button type="button"
+                                            class="font-bold hover:text-gray-700 transition-colors px-1 text-base">
+                                            <i class="ri-bold"></i>
+                                        </button>
+                                        <button type="button"
+                                            class="italic hover:text-gray-700 transition-colors px-1 text-base font-serif">
+                                            <i class="ri-italic"></i>
+                                        </button>
+                                        <button type="button"
+                                            class="hover:text-gray-700 transition-colors px-1 text-base">
+                                            <i class="ri-underline"></i>
+                                        </button>
                                         <div class="w-px h-4 bg-gray-200 mx-1"></div>
-                                        <button class="hover:text-gray-700 transition-colors"><i
-                                                class="ri-list-check"></i></button>
-                                        <button class="hover:text-gray-700 transition-colors"><i
-                                                class="ri-list-check"></i></button>
-
+                                        <button type="button" class="hover:text-gray-700 transition-colors">
+                                            <i class="ri-list-check"></i>
+                                        </button>
+                                        <button type="button" class="hover:text-gray-700 transition-colors">
+                                            <i class="ri-list-unordered"></i>
+                                        </button>
                                         <div class="w-px h-4 bg-gray-200 mx-1"></div>
-                                        <button class="hover:text-gray-700 transition-colors"><i
-                                                class="ri-link"></i></button>
-                                        <button class="hover:text-gray-700 transition-colors"><i
-                                                class="ri-file-image-line"></i></button>
+                                        <button type="button" class="hover:text-gray-700 transition-colors">
+                                            <i class="ri-link"></i>
+                                        </button>
+                                        <button type="button" class="hover:text-gray-700 transition-colors">
+                                            <i class="ri-file-image-line"></i>
+                                        </button>
                                     </div>
-
-                                    <textarea placeholder="Write your note here..."
-                                        class="w-full px-4 py-4 min-h-40 bg-white text-sm text-gray-800 placeholder:text-gray-300 focus:outline-none resize-none leading-relaxed"></textarea>
+                                    <textarea name="content" placeholder="Write your note here..."
+                                        class="w-full px-4 py-4 min-h-52 bg-white text-sm text-gray-800 
+         placeholder:text-gray-300 
+         focus:outline-none focus:ring-0 
+         border-0 resize-none leading-relaxed block">
+</textarea>
                                 </div>
                             </div>
 
-                            <!-- color -->
+                            <!-- Submit -->
                             <div class="flex items-center justify-end pt-2">
                                 <button type="submit"
-                                    class="inline-flex items-center gap-2 px-5 py-2.5 bg-[#7A5CFA] text-white text-xs font-semibold rounded-xl shadow-md hover:bg-[#684be3] transition-colors self-end">
-                                    <i class="ri-file-line"></i>Save Note
+                                    class="self-start mt-1 inline-flex items-center gap-1.5 px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/80 transition">
+                                    Save Note
                                 </button>
                             </div>
 
                         </form>
-
                     </div>
                 </div>
 
