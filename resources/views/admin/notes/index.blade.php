@@ -4,8 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard</title>
-    <!-- CSS -->
-    <link rel="stylesheet" href="src/output.css" />
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -48,7 +47,7 @@
 
         <div class="relative border-t border-gray-100 px-4 py-5 rounded-lg overflow-hidden"style="min-height: 180px">
           <!-- Background image -->
-          <img src="assets/sign-in-bg.png"alt="Login Background"class="absolute inset-0 w-full h-full object-cover"/>
+          <img src="{{ asset('assets/vellum-logo.png') }}"alt="Login Background"class="absolute inset-0 w-full h-full object-cover"/>
 
           <!-- Konten -->
           <div class="relative z-10 flex flex-col gap-3">
@@ -67,6 +66,7 @@
 
             <!-- Tombol Logout -->
             <form method="POST" action="{{ route('logout') }}">
+                @csrf
               <button type="submit"class="w-full py-2.5 mt-1 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 hover:bg-white/30 text-white text-sm font-semibold transition flex items-center justify-center gap-2">
                 <svg class="w-4 h-4"fill="none"stroke="currentColor"viewBox="0 0 24 24">
                   <path stroke-linecap="round"stroke-linejoin="round"stroke-width="2"d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
@@ -88,7 +88,7 @@
         <main class="flex-1 flex flex-col overflow-hidden">
           <!-- Greeting Banner — tidak scroll -->
           <div class="relative overflow-hidden shrink-0 rounded-tl-[3rem]"style="height: 220px">
-            <img src="assets/sign-in-bg.png"alt="Dashboard Background"class="absolute inset-0 w-full h-full object-cover"/>
+            <img src="{{ asset('assets/sign-in-bg.png') }}"alt="Dashboard Background"class="absolute inset-0 w-full h-full object-cover"/>
 
             <!-- Category Header -->
             <div class="relative z-10 h-full flex flex-col justify-center p-6">
@@ -124,7 +124,7 @@
                 <div class="space-y-4 flex-1 overflow-y-auto pr-2">
 
                   <!-- Note Item 1 -->
-                  <a href="view notes.html" class="flex items-center justify-between border border-gray-200 rounded-2xl p-4 hover:shadow-md transition">
+                  <a href="{{ route('view-note') }}" class="flex items-center justify-between border border-gray-200 rounded-2xl p-4 hover:shadow-md transition">
                     <div class="flex items-center gap-4">
                       <div class="w-12 h-12 bg-[#E9E0FF] rounded-xl flex items-center justify-center">
                         <i class="ri-file-paper-2-fill text-2xl text-[#7B5DFE]"></i>
