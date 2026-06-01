@@ -31,6 +31,10 @@ Route::get('/category/create', function () {
     return view('admin.categories.create');
 });
 
+Route::get('/notes/create', function () {
+    return view('admin.categories.create');
+});
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
