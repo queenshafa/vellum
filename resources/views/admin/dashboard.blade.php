@@ -322,25 +322,5 @@
             </main>
         </div>
     </div>
-
-</body>
-
-</html>
- gap-3 mt-8">
-            <i class="ri-timer-line text-3xl"></i>
-            <span class="text-xs"> 10.20 PM, Monday </span>
-        </div>
-        </div>
-
-    </div>
-   </div> 
-
-   
-
-
-  </main>
- </div>
-</div>
-
 </body>
 </html>

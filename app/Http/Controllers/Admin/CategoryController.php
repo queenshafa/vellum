@@ -1,0 +1,44 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+
+class CategoryController extends Controller
+{
+    public function index()
+    {
+        return view('admin.category');
+    }
+
+    public function create()
+    {
+        return view('admin.categories.create');
+    }
+
+    public function store(Request $request)
+    {
+        // logic simpan category
+    }
+
+    // public function show(string $id)
+    // {
+    //     //
+    // }
+
+    // public function edit(string $id)
+    // {
+    //     //
+    // }
+
+    // public function update(Request $request, string $id)
+    // {
+    //     //
+    // }
+
+    // public function destroy(string $id)
+    // {
+    //     //
+    // }
+}
