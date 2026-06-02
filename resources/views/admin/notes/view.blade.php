@@ -17,6 +17,7 @@
   <body>
     <!-- navigation -->
     <div class="flex h-screen min-w-0">
+        
       <!-- Side Bar -->
       <aside id="sideBar"class="hidden w-64 bg-white rounded-4xl md:flex flex-col justify-between p-6 text-primary shrink-0">
         <div>
@@ -88,7 +89,7 @@
         <main class="flex-1 flex flex-col overflow-hidden">
         <!-- Greeting Banner — tidak scroll -->
         <div class="relative overflow-hidden shrink-0 rounded-tl-[3rem]"style="height: 220px">
-            <img src="assets/sign-in-bg.png"alt="Dashboard Background"class="absolute inset-0 w-full h-full object-cover"/>
+            <img src="{{ asset('assets/sign-in-bg.png') }}"alt="Dashboard Background"class="absolute inset-0 w-full h-full object-cover"/>
 
             <!-- Category Header -->
             <div class="relative z-10 h-full flex flex-col justify-center p-6">
