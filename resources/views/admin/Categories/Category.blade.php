@@ -138,6 +138,8 @@
                 <div class="flex-1 flex flex-col bg-white rounded-tl-[3rem] -mt-12 relative z-10 border border-gray-200 overflow-hidden">
                     <div class="flex-1 overflow-y-auto px-10 pt-8 pb-8">
                         <div class="flex flex-col gap-3">
+                            @foreach ($categories as $category)
+                                
                             {{-- Folder 1 --}}
                             <div
                                 class="bg-white rounded-xl shadow-sm py-4 px-6 flex items-center justify-between gap-4 border border-gray-300">
@@ -146,126 +148,15 @@
                                     <i class="ri-folders-line text-xl text-primary"></i>
                                 </div>
                                 <div class="flex-1">
-                                    <p class="text-sm text-gray-800 font-medium">Study</p>
+                                    <p class="text-sm text-gray-800 font-medium">{{ $category->name }}</p>
                                     <p class="text-xs text-gray-400">3 Notes</p>
                                 </div>
-                                <a href="#"
+                                <a href="{{ route('admin.notes.show', $category->id) }}"
                                     class="inline-flex items-center gap-1.5 px-2 py-1 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/80 transition">
                                     <i class="ri-arrow-right-line text-xl"></i>
                                 </a>
                             </div>
-                            {{-- Folder 2 --}}
-                            <div
-                                class="bg-white rounded-xl shadow-sm py-4 px-6 flex items-center justify-between gap-4 border border-gray-300">
-                                <div
-                                    class="w-12 h-12 rounded-xl bg-primary/30 flex items-center justify-center shrink-0 border border-primary">
-                                    <i class="ri-folders-line text-xl text-primary"></i>
-                                </div>
-                                <div class="flex-1">
-                                    <p class="text-sm text-gray-800 font-medium">Travelling</p>
-                                    <p class="text-xs text-gray-400">5 Notes</p>
-                                </div>
-                                <a href="#"
-                                    class="inline-flex items-center gap-1.5 px-2 py-1 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/80 transition">
-                                    <i class="ri-arrow-right-line text-xl"></i>
-                                </a>
-                            </div>
-                            {{-- Folder 3 --}}
-                            <div
-                                class="bg-white rounded-xl shadow-sm py-4 px-6 flex items-center justify-between gap-4 border border-gray-300">
-                                <div
-                                    class="w-12 h-12 rounded-xl bg-primary/30 flex items-center justify-center shrink-0 border border-primary">
-                                    <i class="ri-folders-line text-xl text-primary"></i>
-                                </div>
-                                <div class="flex-1">
-                                    <p class="text-sm text-gray-800 font-medium">Work</p>
-                                    <p class="text-xs text-gray-400">8 Notes</p>
-                                </div>
-                                <a href="#"
-                                    class="inline-flex items-center gap-1.5 px-2 py-1 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/80 transition">
-                                    <i class="ri-arrow-right-line text-xl"></i>
-                                </a>
-                            </div>
-                            {{-- Folder 4 --}}
-                            <div
-                                class="bg-white rounded-xl shadow-sm py-4 px-6 flex items-center justify-between gap-4 border border-gray-300">
-                                <div
-                                    class="w-12 h-12 rounded-xl bg-primary/30 flex items-center justify-center shrink-0 border border-primary">
-                                    <i class="ri-folders-line text-xl text-primary"></i>
-                                </div>
-                                <div class="flex-1">
-                                    <p class="text-sm text-gray-800 font-medium">Personal</p>
-                                    <p class="text-xs text-gray-400">2 Notes</p>
-                                </div>
-                                <a href="#"
-                                    class="inline-flex items-center gap-1.5 px-2 py-1 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/80 transition">
-                                    <i class="ri-arrow-right-line text-xl"></i>
-                                </a>
-                            </div>
-                            {{-- Folder 5 --}}
-                            <div
-                                class="bg-white rounded-xl shadow-sm py-4 px-6 flex items-center justify-between gap-4 border border-gray-300">
-                                <div
-                                    class="w-12 h-12 rounded-xl bg-primary/30 flex items-center justify-center shrink-0 border border-primary">
-                                    <i class="ri-folders-line text-xl text-primary"></i>
-                                </div>
-                                <div class="flex-1">
-                                    <p class="text-sm text-gray-800 font-medium">Movie Review</p>
-                                    <p class="text-xs text-gray-400">4 Notes</p>
-                                </div>
-                                <a href="#"
-                                    class="inline-flex items-center gap-1.5 px-2 py-1 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/80 transition">
-                                    <i class="ri-arrow-right-line text-xl"></i>
-                                </a>
-                            </div>
-                            {{-- Folder 6 --}}
-                            <div
-                                class="bg-white rounded-xl shadow-sm py-4 px-6 flex items-center justify-between gap-4 border border-gray-300">
-                                <div
-                                    class="w-12 h-12 rounded-xl bg-primary/30 flex items-center justify-center shrink-0 border border-primary">
-                                    <i class="ri-folders-line text-xl text-primary"></i>
-                                </div>
-                                <div class="flex-1">
-                                    <p class="text-sm text-gray-800 font-medium">Groceries</p>
-                                    <p class="text-xs text-gray-400">1 Note</p>
-                                </div>
-                                <a href="#"
-                                    class="inline-flex items-center gap-1.5 px-2 py-1 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/80 transition">
-                                    <i class="ri-arrow-right-line text-xl"></i>
-                                </a>
-                            </div>
-                            {{-- Folder 7 --}}
-                            <div
-                                class="bg-white rounded-xl shadow-sm py-4 px-6 flex items-center justify-between gap-4 border border-gray-300">
-                                <div
-                                    class="w-12 h-12 rounded-xl bg-primary/30 flex items-center justify-center shrink-0 border border-primary">
-                                    <i class="ri-folders-line text-xl text-primary"></i>
-                                </div>
-                                <div class="flex-1">
-                                    <p class="text-sm text-gray-800 font-medium">Journal</p>
-                                    <p class="text-xs text-gray-400">6 Notes</p>
-                                </div>
-                                <a href="#"
-                                    class="inline-flex items-center gap-1.5 px-2 py-1 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/80 transition">
-                                    <i class="ri-arrow-right-line text-xl"></i>
-                                </a>
-                            </div>
-                            {{-- Folder 8 --}}
-                            <div
-                                class="bg-white rounded-xl shadow-sm py-4 px-6 flex items-center justify-between gap-4 border border-gray-300">
-                                <div
-                                    class="w-12 h-12 rounded-xl bg-primary/30 flex items-center justify-center shrink-0 border border-primary">
-                                    <i class="ri-folders-line text-xl text-primary"></i>
-                                </div>
-                                <div class="flex-1">
-                                    <p class="text-sm text-gray-800 font-medium">Recipes</p>
-                                    <p class="text-xs text-gray-400">7 Notes</p>
-                                </div>
-                                <a href="#"
-                                    class="inline-flex items-center gap-1.5 px-2 py-1 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/80 transition">
-                                    <i class="ri-arrow-right-line text-xl"></i>
-                                </a>
-                            </div>
+                            @endforeach
 
                         </div>
                     </div>
@@ -277,7 +168,8 @@
     </div>
 
     <!-- Modal Add Category -->
-    <div id="categoryModal"class="fixed inset-0 bg-black/40 flex items-center justify-center z-50 hidden">
+    <form  id="categoryModal" method="POST" action="{{ route('admin.category.store') }}" class="fixed inset-0 bg-black/40 flex items-center justify-center z-50 hidden">
+        @csrf
 
     <div class="bg-white w-[420px] rounded-[20px] border-2 border-gray-300 p-8 shadow-xl">
 
@@ -292,22 +184,22 @@
                 Name:
             </label>
 
-            <input type="text"placeholder="New Category"class="w-[280px] border-2 border-[#7B5DFE] rounded-xl px-4 py-2 text-base text-[#7B5DFE] focus:outline-none">
+            <input type="text" name="name" placeholder="New Category" class="w-[280px] border-2 border-[#7B5DFE] rounded-xl px-4 py-2 text-base text-[#7B5DFE] focus:outline-none">
         </div>
 
         <!-- Button -->
-        <div class="flex justify-end gap-3">
-            <button id="closeModal"class="bg-gray-300 text-gray-700 px-6 py-2 rounded-lg text-sm">
+        <div class="flex justify-between gap-3 py-2">
+            <button type="button" id="closeModal" class="bg-gray-300 text-gray-700 px-20 py-2 rounded-lg text-sm">
                 Cancel
             </button>
 
-            <button class="bg-[#7B5DFE] text-white px-12 py-3 rounded-lg text-sm">
+            <button type="submit" class="bg-[#7B5DFE] text-white px-20 py-3 rounded-lg text-sm">
                 OK
             </button>
         </div>
 
     </div>
-    </div>
+    </form>
 
     {{-- JS --}}
     <script>

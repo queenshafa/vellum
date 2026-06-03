@@ -1,45 +1,45 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\NoteController;
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-// Public & Static Views
+// Public & Static Views Landing Page
 Route::get('/', function () {
     return view('welcome');
 });
 
+// Dashboard Fallback Redirect - Keeps everything perfectly synchronized
 Route::get('/dashboard', function () {
-    $notes = auth()->user()->notes()
-        ->orderBy('is_pinned', 'desc')
-        ->latest()
-        ->get();
-
-    return view('dashboard', compact('notes')); // points to your working notes folder view!
+    return redirect()->route('notes.index');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
-// Kelola Notes (Manage Notes)
+// Kelola Notes (Manage Notes Group)
 Route::middleware(['auth', 'verified'])->controller(NoteController::class)->group(function() {
-    Route::get('/notes/pinned', [NoteController::class, 'pinned'])->name('notes.pinned');
+    Route::get('notes/pinned', 'pinned')->name('notes.pinned');
     Route::get('notes/index', 'index')->name('notes.index');
     Route::get('notes/create', 'create')->name('notes.create');
     Route::post('notes/store', 'store')->name('notes.store');
-    Route::get('notes/show/{note}', 'show')->name('notes.view');
-    Route::get('notes/edit/{note}', 'edit')->name('notes.edit');
-    Route::put('notes/update/{note}', 'update')->name('notes.update');
-    Route::delete('notes/destroy/{note}', 'destroy')->name('notes.destroy');
-    Route::post('notes/toggle-pin/{note}', 'togglePin')->name('notes.togglePin');
+    
+    // Kept parameters as {id} to match your explicit controller code style!
+    Route::get('notes/show/{id}', 'show')->name('notes.show'); 
+    Route::get('notes/edit/{id}', 'edit')->name('notes.edit');
+    Route::put('notes/update/{id}', 'update')->name('notes.update');
+    Route::delete('notes/destroy/{id}', 'destroy')->name('notes.destroy');
+    Route::post('notes/toggle-pin/{id}', 'togglePin')->name('notes.togglePin');
 });
 
 
 // Kelola Kategori (Manage Categories)
 Route::middleware(['auth', 'verified'])->controller(CategoryController::class)->group(function() {
-    Route::get('admin/category', 'index')->name('admin.category.index');
-    Route::get('admin/category/create', 'create')->name('admin.category.create');
-    Route::post('admin/category/store', 'store')->name('admin.category.store');
+    Route::get('/category', 'index')->name('category.index');
+    Route::get('/category/create', 'create')->name('category.create');
+    Route::post('/category', 'store')->name('category.store');
+    Route::get('/category/edit/{id}', 'edit')->name('category.edit');
+    Route::put('/category/update/{id}', 'update')->name('category.update'); // Fixed name suffix mismatch here
 });
 
 
@@ -49,6 +49,5 @@ Route::middleware('auth')->controller(ProfileController::class)->group(function(
     Route::patch('/profile', 'update')->name('profile.update');
     Route::delete('/profile', 'destroy')->name('profile.destroy');
 });
-
 
 require __DIR__.'/auth.php';

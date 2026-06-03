@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Note;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,13 +30,19 @@ class NoteController extends Controller
 
         return view('admin.notes.index', compact('notes'));
     }
+    public function index($id)
+    {
+        $category = Category::findOrFail($id);
+        return view('admin.notes.index', compact('category'));
+    }
 
     /**
      * Show the form for creating a new note.
      */
     public function create()
     {
-        return view('admin.notes.create');
+        $categories = Category::all();
+        return view('admin.notes.create', compact('categories'));
     }
 
     /**
@@ -84,6 +91,23 @@ class NoteController extends Controller
                         ->first();
 
         return view('admin.notes.view', compact('note', 'previousNote', 'nextNote'));
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required',
+            'category_id' => 'required|exists:categories,id',
+        ]);
+
+        \App\Models\Note::create($validated);
+
+        return redirect()
+            ->route('admin.notes.index')
+            ->with('success', 'Note berhasil ditambahkan');
+    }
+
+    public function show($id)
+    {
+        $category = Category::findOrFail($id);
+        return view('admin.notes.index', compact('category'));
     }
 
     /**
