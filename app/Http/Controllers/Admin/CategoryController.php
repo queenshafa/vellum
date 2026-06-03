@@ -50,7 +50,7 @@ class CategoryController extends Controller
         ]);
 
         return redirect()
-            ->route('admin.categoru.index')
+            ->route('admin.category.index')
             ->with('success', 'Kategori berhasil diupdate');
     }
 
