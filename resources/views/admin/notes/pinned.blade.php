@@ -3,14 +3,14 @@
 @section('title', 'Notes | Vellum')
 
 @section('banner-title')
-    {{ request('category') ? ucfirst(request('category')) : 'All Notes' }}
+    Pinned Notes
 @endsection
 
 @section('banner-subtitle')
     {{ $notes->count() }} {{ Str::plural('Note', $notes->count()) }}
 @endsection
 
-@section('banner-actions')
+{{-- @section('banner-actions')
     <div class="flex gap-2">
         @if (request('category'))
             <a href="#"
@@ -24,7 +24,7 @@
             <i class="ri-add-line font-bold"></i> Add Note
         </a>
     </div>
-@endsection
+@endsection --}}
 
 @section('content')
     <div class="px-8 pt-8 flex-1 overflow-hidden">

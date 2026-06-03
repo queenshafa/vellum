@@ -18,6 +18,16 @@ export default {
                 primary: "#7B5DFE",
                 secondary: "#FF6F29",
             },
+            animation: {
+                // Defines the utility class: animate-marquee
+                marquee: "marquee 20s linear infinite",
+            },
+            keyframes: {
+                marquee: {
+                    "0%": { transform: "translateX(0%)" },
+                    "100%": { transform: "translateX(-100%)" },
+                },
+            },
         },
     },
 

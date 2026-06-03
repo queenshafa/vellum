@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -18,6 +17,7 @@
     <!-- navigation -->
     <div class="flex h-screen min-w-0">
 
+        {{-- Side bar --}}
         <aside id="sideBar"
             class="hidden w-64 bg-white rounded-4xl md:flex flex-col justify-between p-6 text-primary shrink-0">
             <div>
@@ -29,31 +29,26 @@
 
                 <!-- Navigation Menu -->
                 <nav class="space-y-2">
-                    <a href="#"
-                        class="flex items-center gap-4 px-4 py-4 rounded-lg text-sm font-medium bg-primary text-white  hover:bg-[#F5F6FA] hover:text-primary transition-all">
+                    <a href="#"class="flex items-center gap-4 px-4 py-4 rounded-lg text-sm font-medium bg-primary text-white  hover:bg-[#F5F6FA] hover:text-primary transition-all">
                         <i class="ri-dashboard-line"></i>Dashboard
                     </a>
 
-                    <a href="#"
-                        class="flex items-center gap-4 px-3 py-2 rounded-xl text-m font-medium hover:bg-[#F5F6FA] hover:text-[#7B5DFE] hover:rounded-full transition-all">
+                    <a href="#"class="flex items-center gap-4 px-3 py-2 rounded-xl text-m font-medium hover:bg-[#F5F6FA] hover:text-[#7B5DFE] hover:rounded-full transition-all">
                         <i class="ri-menu-search-line"></i>Category
                     </a>
 
-                    <a href="#"
-                        class="flex items-center gap-4 px-3 py-2 rounded-xl text-m font-medium hover:bg-[#F5F6FA] hover:text-[#7B5DFE] hover:rounded-full transition-all">
+                    <a href="#"class="flex items-center gap-4 px-3 py-2 rounded-xl text-m font-medium hover:bg-[#F5F6FA] hover:text-[#7B5DFE] hover:rounded-full transition-all">
                         <i class="ri-pushpin-line"></i>Pin Notes
                     </a>
 
-                    <a href="#"
-                        class="flex items-center gap-4 px-3 py-2 rounded-xl text-m font-medium hover:bg-[#F5F6FA] hover:text-[#7B5DFE] hover:rounded-full transition-all  mb-20">
+                    <a href="#"class="flex items-center gap-4 px-3 py-2 rounded-xl text-m font-medium hover:bg-[#F5F6FA] hover:text-[#7B5DFE] hover:rounded-full transition-all  mb-20">
                         <i class="ri-calendar-line"></i>Calendar
                     </a>
                 </nav>
             </div>
 
             <!-- User Info + Logout -->
-            <div class="relative border-t border-gray-100 px-4 py-5 rounded-lg overflow-hidden"
-                style="min-height: 180px;">
+            <div class="relative border-t border-gray-100 px-4 py-5 rounded-lg overflow-hidden"style="min-height: 180px;">
 
                 <!-- Background image -->
                 <img src="{{ asset('/assets/sign-in-bg.png') }}" alt="Login Background"
@@ -130,19 +125,17 @@
                             <p class="text-white/80 text-sm tracking-tight">Let's capture your thoughts and stay on top
                                 of everything.</p>
                         </div>
-                        <a href="#"
-                            class="self-start mt-1 inline-flex items-center gap-1.5 px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/80 transition">
+                        <button id="openModal"class="self-start mt-1 inline-flex items-center gap-1.5 px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/80 transition">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M12 4v16m8-8H4" />
                             </svg>
                             Add Category
-                        </a>
+                        </button>
                     </div>
                 </div>
 
-                <div
-                    class="flex-1 flex flex-col bg-white rounded-tl-[3rem] -mt-12 relative z-10 border border-gray-200 overflow-hidden">
+                <div class="flex-1 flex flex-col bg-white rounded-tl-[3rem] -mt-12 relative z-10 border border-gray-200 overflow-hidden">
                     <div class="flex-1 overflow-y-auto px-10 pt-8 pb-8">
                         <div class="flex flex-col gap-3">
                             {{-- Folder 1 --}}
@@ -282,6 +275,54 @@
             </main>
         </div>
     </div>
+
+    <!-- Modal Add Category -->
+    <div id="categoryModal"class="fixed inset-0 bg-black/40 flex items-center justify-center z-50 hidden">
+
+    <div class="bg-white w-[420px] rounded-[20px] border-2 border-gray-300 p-8 shadow-xl">
+
+        <!-- Title -->
+        <h1 class="text-2xl font-bold text-[#7B5DFE] mb-8">
+            New Category
+        </h1>
+
+        <!-- Input -->
+        <div class="flex items-center gap-4 mb-10">
+            <label class="text-xl font-semibold text-[#7B5DFE]">
+                Name:
+            </label>
+
+            <input type="text"placeholder="New Category"class="w-[280px] border-2 border-[#7B5DFE] rounded-xl px-4 py-2 text-base text-[#7B5DFE] focus:outline-none">
+        </div>
+
+        <!-- Button -->
+        <div class="flex justify-end gap-3">
+            <button id="closeModal"class="bg-gray-300 text-gray-700 px-6 py-2 rounded-lg text-sm">
+                Cancel
+            </button>
+
+            <button class="bg-[#7B5DFE] text-white px-12 py-3 rounded-lg text-sm">
+                OK
+            </button>
+        </div>
+
+    </div>
+    </div>
+
+    {{-- JS --}}
+    <script>
+        const modal = document.getElementById('categoryModal');
+        const openBtn = document.getElementById('openModal');
+        const closeBtn = document.getElementById('closeModal');
+    
+        openBtn.addEventListener('click', () => {
+            modal.classList.remove('hidden');
+        });
+    
+        closeBtn.addEventListener('click', () => {
+            modal.classList.add('hidden');
+        });
+    </script>
 
 </body>
 

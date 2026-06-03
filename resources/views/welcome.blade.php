@@ -4,15 +4,14 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vellum</title>
-    <!-- TailwindCSS -->
-    {{-- <link rel="stylesheet" href="/src/output.css" /> --}}
-    <!-- Remixicon -->
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet" />
-    <!-- AlpineJS -->
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <!-- Styles / Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/landing.css', 'resources/js/frontend.js'])
+    <title>@yield('title', 'Vellum')</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="shortcut icon" href="{{ asset('/assets/vellum-logo.svg') }}" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet" />
 </head>
 
 <body class="font-plus-jakarta-sans">
@@ -22,7 +21,7 @@
         <nav
             class="hidden md:flex w-full max-w-2xl bg-white/90 backdrop-blur-md rounded-full shadow-lg px-3 py-3 items-center justify-between">
             <a href="#" class="flex-shrink-0">
-                <img src="/vellum-logo.svg" class="w-10 invert sepia saturate-500 hue-rotate-20" />
+                <img src="{{ asset('assets/vellum-logo.svg') }}" class="w-10 invert sepia saturate-500 hue-rotate-20" />
             </a>
             <div class="flex items-center gap-10">
                 <a href="#"
@@ -34,29 +33,12 @@
             </div>
             <div class="flex items-center gap-4">
                 <div class="w-px h-5 bg-gray-300"></div>
-                <button
-                    class="bg-secondary text-white text-sm hover:text-gray-700 transition-colors duration-200 p-3 rounded-full cursor-pointer">
-                    Get Started
-                    <!-- <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="w-5 h-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              stroke-width="1.6"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"
-              />
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M10 11v5M14 11v5"
-              />
-            </svg> -->
-                </button>
+                <a href="{{ route('register') }}">
+                    <button
+                        class="bg-secondary text-white text-sm hover:text-gray-700 transition-colors duration-200 p-3 rounded-full cursor-pointer">
+                        Get Started
+                    </button>
+                </a>
             </div>
         </nav>
 
@@ -111,7 +93,7 @@
     </header>
     <!-- Hero -->
     <section
-        class="relative m-8 h-[calc(100vh-64px)] rounded-4xl overflow-hidden flex flex-col items-center justify-center">
+        class="relative m-8 h-[calc(100vh-64px)] rounded-3xl overflow-hidden flex flex-col items-center justify-center">
         <video autoplay muted loop class="absolute inset-0 w-full h-full object-cover -z-10 rounded-4xl">
             <source src="https://www.pexels.com/download/video/34170260/" type="video/mp4" />
         </video>
@@ -125,9 +107,9 @@
             <span class="font-instrument-serif font-normal italic">simple</span>.
         </h1>
         <div class="flex gap-4 mt-14">
-            <a href="#" class="bg-white py-4 px-8 rounded-full uppercase font-bold">Start Writing <i
-                    class="ri-arrow-right-line ml-2"></i></a>
-            <a href="#"
+            <a href="{{ route('dashboard') }}" class="bg-white py-4 px-8 rounded-full uppercase font-bold">Start
+                Writing <i class="ri-arrow-right-line ml-2"></i></a>
+            <a href="#cta"
                 class="text-gray-100 hover:text-white py-4 px-8 rounded-full uppercase font-bold transition">Learn More
                 <i class="ri-arrow-right-line ml-2"></i></a>
         </div>
@@ -136,11 +118,11 @@
     <!-- About -->
     <section class="pt-4 lg:py-8">
         <p class="text-gray-600 tracking-tight text-xl font-medium text-center lg:mt-20">
-            why happly?
+            why Vellum?
         </p>
         <div class="mt-8 px-8">
             <h2 class="text-4xl lg:text-6xl font-semibold text-center tracking-tight leading-tight">
-                Lorem
+                Vellum
                 <span class="inline-block align-middle mx-2">
                     <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=2340&auto=format&fit=crop"
                         alt="yay" class="h-[1.2em] w-[2.5em] object-cover rounded-full" />
@@ -148,7 +130,7 @@
                 is a simple notes web app designed for clarity. Write, save, and
                 revisit
                 <span class="inline-block align-middle mx-2">
-                    <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=2340&auto=format&fit=crop"
+                    <img src="https://images.unsplash.com/photo-1483546416237-76fd26bbcdd1?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                         alt="yay" class="h-[1.2em] w-[2.5em] object-cover rounded-full" />
                 </span>
                 your thoughts without unnecessary features getting in the way.
@@ -204,64 +186,59 @@
     </div>
 
     <!-- How it Works -->
-    <section class="min-h-screen py-8 px-14 bg-primary">
-        <div class="flex text-white">
-            <p class="text-5xl font-medium">
-                <span class="text-sm font-medium tracking-tight uppercase mr-14 lg:mr-30">
+    <section class="min-h-screen py-16 px-6 md:px-14 bg-primary flex flex-col justify-center">
+
+        <!-- Top Header Title Block -->
+        <div class="w-full text-white mb-16">
+            <div class="flex flex-col lg:flex-row items-start gap-6 lg:gap-24">
+                <span class="text-sm font-semibold tracking-widest uppercase shrink-0 pt-3">
                     How it Works?
                 </span>
-                A simple flow designed to help you write, save, and revisit your notes
-                effortlessly.
-            </p>
-        </div>
-
-        <div
-            class="h-90 mt-30 flex flex-col lg:flex-row lg:justify-between lg:items-center justify-center border-b border-t border-b-white border-t-white">
-            <div class="flex justify-end items-center text-white">
-                <!-- <i class="ri-file-edit-line text-8xl"></i> -->
-                <p class="text-2xl flex gap-x-4 items-center uppercase font-medium">
-                    Step <span class="text-9xl font-bold">01</span>
+                <p class="text-4xl md:text-5xl font-medium max-w-5xl leading-tight">
+                    A simple flow designed to help you write, save, and revisit your notes effortlessly.
                 </p>
             </div>
-            <p class="text-white text-2xl font-medium mt-6">
+        </div>
+
+        <!-- Step 01 Container -->
+        <div
+            class="min-h-[220px] lg:h-[260px] py-8 flex flex-col lg:flex-row lg:justify-between lg:items-center border-t border-b border-white/30 gap-4">
+            <div class="flex items-center text-white shrink-0">
+                <p class="text-xl md:text-2xl flex gap-x-4 items-center uppercase font-medium">
+                    Step <span class="text-7xl md:text-9xl font-bold tracking-tighter">01</span>
+                </p>
+            </div>
+            <p class="text-white text-xl md:text-2xl font-medium lg:max-w-xl lg:text-right">
                 Start writing as soon as an idea appears.
             </p>
         </div>
+
+        <!-- Step 02 Container -->
         <div
-            class="h-90 flex flex-col lg:flex-row lg:justify-between lg:items-center justify-center border-b border-b-white">
-            <div class="flex justify-end items-center text-white">
-                <!-- <i class="ri-file-edit-line text-8xl"></i> -->
-                <p class="text-2xl flex gap-x-4 items-center uppercase font-medium">
-                    Step <span class="text-9xl font-bold">02</span>
+            class="min-h-[220px] lg:h-[260px] py-8 flex flex-col lg:flex-row lg:justify-between lg:items-center border-b border-white/30 gap-4">
+            <div class="flex items-center text-white shrink-0">
+                <p class="text-xl md:text-2xl flex gap-x-4 items-center uppercase font-medium">
+                    Step <span class="text-7xl md:text-9xl font-bold tracking-tighter">02</span>
                 </p>
             </div>
-            <p class="text-white text-2xl font-medium mt-6">
+            <p class="text-white text-xl md:text-2xl font-medium lg:max-w-xl lg:text-right">
                 Structure your thoughts without extra effort.
             </p>
         </div>
+
+        <!-- Step 03 Container -->
         <div
-            class="h-90 flex flex-col lg:flex-row lg:justify-between lg:items-center justify-center border-b border-b-white">
-            <div class="flex justify-end items-center text-white">
-                <!-- <i class="ri-file-edit-line text-8xl"></i> -->
-                <p class="text-2xl flex gap-x-4 items-center uppercase font-medium">
-                    Step <span class="text-9xl font-bold">03</span>
+            class="min-h-[220px] lg:h-[260px] py-8 flex flex-col lg:flex-row lg:justify-between lg:items-center border-b border-white/30 gap-4">
+            <div class="flex items-center text-white shrink-0">
+                <p class="text-xl md:text-2xl flex gap-x-4 items-center uppercase font-medium">
+                    Step <span class="text-7xl md:text-9xl font-bold tracking-tighter">03</span>
                 </p>
             </div>
-            <p class="text-white text-2xl font-medium mt-6">
+            <p class="text-white text-xl md:text-2xl font-medium lg:max-w-xl lg:text-right">
                 Revisit your notes whenever you need them.
             </p>
         </div>
-        <!-- <div class="h-90 flex flex-col justify-center border-b border-b-white">
-        <div class="flex justify-between items-center text-white">
-          <i class="ri-file-edit-line text-8xl"></i>
-          <p class="text-2xl flex gap-x-4 items-center uppercase font-medium">
-            Step <span class="text-9xl font-bold">04</span>
-          </p>
-        </div>
-        <p class="text-white text-2xl font-medium mt-6">
-          Most creative agency in Brazil 2024 - 2025
-        </p>
-      </div> -->
+
     </section>
 
     <!-- Benefits -->
@@ -319,7 +296,7 @@
     </section>
 
     <!-- CTA -->
-    <section class="min-h-screen py-8 px-8 bg-black text-white">
+    <section class="min-h-screen py-8 px-8 bg-black text-white" id="cta">
         <div class="text-center">
             <p class="text-xl font-medium mt-16 lg:mt-24">
                 Loved by Focused Thinkers
@@ -328,15 +305,15 @@
             <p class="text-gray-400 font-light tracking-tight mt-6 mb-10">
                 Built to support focus, clarity, and better thinking.
             </p>
-            <a href="#"
-                class="bg-linear-to-r from-secondary/70 to-secondary/40 rounded-full bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-10 py-4 pl-2 pr-6 uppercase font-semibold text-gray-100"><i
+            <a href="{{ route('register') }}"
+                class="bg-gradient-to-r from-secondary/70 to-secondary/40 rounded-full bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-10 py-4 pl-2 pr-6 uppercase font-semibold text-gray-100"><i
                     class="ri-arrow-right-line bg-secondary text-xl p-2 rounded-full mr-4"></i>
                 Get Started</a>
         </div>
         <div class="flex overflow-x-scroll gap-8 lg:gap-4 scrollbar-hide snap-x snap-mandatory mt-20 lg:mt-50">
             <div class="min-w-98 lg:min-w-2xl">
                 <div
-                    class="bg-linear-to-br from-gray-400/20 via-gray-600/20 to-secondary rounded-2xl bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-10 p-4 font-semibold border border-gray-600 text-gray-100">
+                    class="bg-gradient-to-br from-gray-400/20 via-gray-600/20 to-secondary rounded-2xl bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-10 p-4 font-semibold border border-gray-600 text-gray-100">
                     <div class="bg-black rounded-2xl p-8 pb-20">
                         <h class="text-xl">Eula Lawrence</h>
                         <p class="text-secondary text-sm">
@@ -354,7 +331,7 @@
             </div>
             <div class="min-w-98 lg:min-w-2xl">
                 <div
-                    class="bg-linear-to-tl from-gray-400/20 via-gray-600/20 to-secondary rounded-2xl bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-10 p-4 font-semibold border border-gray-600 text-gray-100">
+                    class="bg-gradient-to-tl from-gray-400/20 via-gray-600/20 to-secondary rounded-2xl bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-10 p-4 font-semibold border border-gray-600 text-gray-100">
                     <div class="bg-black rounded-2xl p-8 pb-20">
                         <h class="text-xl">Eula Lawrence</h>
                         <p class="text-secondary text-sm">
@@ -372,7 +349,7 @@
             </div>
             <div class="min-w-98 lg:min-w-2xl">
                 <div
-                    class="bg-linear-to-br from-gray-400/20 via-gray-600/20 to-secondary rounded-2xl bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-10 p-4 font-semibold border border-gray-600 text-gray-100">
+                    class="bg-gradient-to-br from-gray-400/20 via-gray-600/20 to-secondary rounded-2xl bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-10 p-4 font-semibold border border-gray-600 text-gray-100">
                     <div class="bg-black rounded-2xl p-8 pb-20">
                         <h class="text-xl">Eula Lawrence</h>
                         <p class="text-secondary text-sm">
@@ -390,7 +367,7 @@
             </div>
             <div class="min-w-98 lg:min-w-2xl">
                 <div
-                    class="bg-linear-to-br from-gray-400/20 via-gray-600/20 to-secondary rounded-2xl bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-10 p-4 font-semibold border border-gray-600 text-gray-100">
+                    class="bg-gradient-to-br from-gray-400/20 via-gray-600/20 to-secondary rounded-2xl bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-10 p-4 font-semibold border border-gray-600 text-gray-100">
                     <div class="bg-black rounded-2xl p-8 pb-20">
                         <h class="text-xl">Eula Lawrence</h>
                         <p class="text-secondary text-sm">
@@ -478,7 +455,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#"
+                        <a href="{{ route('register') }}"
                             class="flex items-center justify-between py-3 text-sm font-medium hover:text-white/60 transition-colors">
                             Get Started <span class="text-white/30 text-xs">↗</span>
                         </a>
