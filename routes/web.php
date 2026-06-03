@@ -26,8 +26,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
     Route::get('/category/create', [CategoryController::class, 'create'])->name('category.create');
     Route::post('/category', [CategoryController::class, 'store'])->name('category.store');
-
-    Route::get('/notes', [NoteController::class, 'index'])->name('notes.index');
+    Route::get('category/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
+    Route::put('category/update/{id}', [CategoryController::class, 'update'])->name('category.update');
+    
+    Route::get('/notes/{id}', [NoteController::class, 'index'])->name('admin.notes.index');
     Route::get('/notes/create', [NoteController::class, 'create'])->name('notes.create');
     Route::post('/notes', [NoteController::class, 'store'])->name('notes.store');
     Route::get('/notes/{id}', [NoteController::class, 'show'])->name('notes.show');

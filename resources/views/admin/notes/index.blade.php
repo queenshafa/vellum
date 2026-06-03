@@ -21,7 +21,7 @@
       <aside id="sideBar"class="hidden w-64 bg-white rounded-4xl md:flex flex-col justify-between p-6 text-primary shrink-0">
         <div>
           <div class="flex items-center justify-center gap-2 px-3 py-4 mb-8">
-            <img src="assets/Logo.png"alt="Vellum logo"class="h-10 bg-primary p-1 rounded-lg"/>
+            <img src="{{ asset('assets/vellum-logo.png') }}" alt="Vellum logo" class="h-10 bg-primary p-1 rounded-lg"/>
             <span class="font-bold text-xl uppercase tracking-wide">Vellum.</span>
           </div>
 
@@ -93,17 +93,17 @@
             <!-- Category Header -->
             <div class="relative z-10 h-full flex flex-col justify-center p-6">
               <div>
-                <a href="#"class="text-white text-sm font-medium hover:underline">← Back</a>
+                <a href="{{ route('admin.category.index') }}"class="text-white text-sm font-medium hover:text-gray-300">← Back</a>
               </div>
 
               <div class="relative z-10 flex justify-between items-start h-full px-10 pb-8 mt-16">
 
                 <div>
-                  <h1 class="text-3xl font-semibold text-white mb-1">Study</h1>
+                  <h1 class="text-3xl font-semibold text-white mb-1">{{ $category->name }}</h1>
                   <p class="text-white/80 text-sm tracking-tight">8 Notes</p>
                 </div>
 
-                <button class="bg-[#7B5DFE] text-white px-5 py-2 rounded-lg text-sm font-medium flex items-center gap-2 hover:scale-105 transition">
+                <button id="openModal" class="bg-[#7B5DFE] text-white px-5 py-2 rounded-lg text-sm font-medium flex items-center gap-2 hover:scale-105 transition">
                   <i class="ri-pencil-fill"></i>
                   Edit Category
                 </button>
@@ -124,7 +124,7 @@
                 <div class="space-y-4 flex-1 overflow-y-auto pr-2">
 
                   <!-- Note Item 1 -->
-                  <a href="{{ route('view-note') }}" class="flex items-center justify-between border border-gray-200 rounded-2xl p-4 hover:shadow-md transition">
+                  <a href="#" class="flex items-center justify-between border border-gray-200 rounded-2xl p-4 hover:shadow-md transition">
                     <div class="flex items-center gap-4">
                       <div class="w-12 h-12 bg-[#E9E0FF] rounded-xl flex items-center justify-center">
                         <i class="ri-file-paper-2-fill text-2xl text-[#7B5DFE]"></i>
@@ -151,119 +151,6 @@
                     </div>
                   </a>
 
-                  <!-- Note Item 2 -->
-                  <div class="flex items-center justify-between border border-gray-200 rounded-2xl p-4 hover:shadow-md transition">
-                    <div class="flex items-center gap-4">
-                      <div class="w-12 h-12 bg-[#E9E0FF] rounded-xl flex items-center justify-center">
-                        <i class="ri-file-paper-2-fill text-2xl text-[#7B5DFE]"></i>
-                      </div>
-
-                      <div>
-                        <h3 class="font-bold text-xl text-[#222]">Mind Test Exam</h3>
-                        <p class="text-gray-400 text-sm">Monday, 20 April 2026 • 16.20</p>
-                      </div>
-                    </div>
-
-                    <div class="flex gap-2">
-                      <button class="w-10 h-10 rounded-lg bg-orange-100 text-[#FF6F29] hover:scale-110 transition">
-                        <i class="ri-pushpin-fill"></i>
-                      </button>
-
-                      <button class="w-10 h-10 rounded-lg bg-[#E9E0FF] text-[#7B5DFE] hover:scale-110 transition">
-                        <i class="ri-pencil-fill"></i>
-                      </button>
-
-                      <button class="w-10 h-10 rounded-lg border border-red-300 text-red-500 hover:scale-110 transition">
-                        <i class="ri-delete-bin-line"></i>
-                      </button>
-                    </div>
-                  </div>
-
-                  <!-- Note Item 3 -->
-                  <div class="flex items-center justify-between border border-gray-200 rounded-2xl p-4 hover:shadow-md transition">
-                    <div class="flex items-center gap-4">
-                      <div class="w-12 h-12 bg-[#E9E0FF] rounded-xl flex items-center justify-center">
-                        <i class="ri-file-paper-2-fill text-2xl text-[#7B5DFE]"></i>
-                      </div>
-
-                      <div>
-                        <h3 class="font-bold text-xl text-[#222]">Mind Test Exam</h3>
-                        <p class="text-gray-400 text-sm">Monday, 20 April 2026 • 16.20</p>
-                      </div>
-                    </div>
-
-                    <div class="flex gap-2">
-                      <button class="w-10 h-10 rounded-lg bg-orange-100 text-[#FF6F29] hover:scale-110 transition">
-                        <i class="ri-pushpin-fill"></i>
-                      </button>
-
-                      <button class="w-10 h-10 rounded-lg bg-[#E9E0FF] text-[#7B5DFE] hover:scale-110 transition">
-                        <i class="ri-pencil-fill"></i>
-                      </button>
-
-                      <button class="w-10 h-10 rounded-lg border border-red-300 text-red-500 hover:scale-110 transition">
-                        <i class="ri-delete-bin-line"></i>
-                      </button>
-                    </div>
-                  </div>
-
-                  <!-- Note Item 4 -->
-                  <div class="flex items-center justify-between border border-gray-200 rounded-2xl p-4 hover:shadow-md transition">
-                    <div class="flex items-center gap-4">
-                      <div class="w-12 h-12 bg-[#E9E0FF] rounded-xl flex items-center justify-center">
-                        <i class="ri-file-paper-2-fill text-2xl text-[#7B5DFE]"></i>
-                      </div>
-
-                      <div>
-                        <h3 class="font-bold text-xl text-[#222]">Mind Test Exam</h3>
-                        <p class="text-gray-400 text-sm">Monday, 20 April 2026 • 16.20</p>
-                      </div>
-                    </div>
-
-                    <div class="flex gap-2">
-                      <button class="w-10 h-10 rounded-lg bg-orange-100 text-[#FF6F29] hover:scale-110 transition">
-                        <i class="ri-pushpin-fill"></i>
-                      </button>
-
-                      <button class="w-10 h-10 rounded-lg bg-[#E9E0FF] text-[#7B5DFE] hover:scale-110 transition">
-                        <i class="ri-pencil-fill"></i>
-                      </button>
-
-                      <button class="w-10 h-10 rounded-lg border border-red-300 text-red-500 hover:scale-110 transition">
-                        <i class="ri-delete-bin-line"></i>
-                      </button>
-                    </div>
-                  </div>
-
-                  <!-- Note Item 5 -->
-                  <div class="flex items-center justify-between border border-gray-200 rounded-2xl p-4 hover:shadow-md transition">
-                    <div class="flex items-center gap-4">
-                      <div class="w-12 h-12 bg-[#E9E0FF] rounded-xl flex items-center justify-center">
-                        <i class="ri-file-paper-2-fill text-2xl text-[#7B5DFE]"></i>
-                      </div>
-
-                      <div>
-                        <h3 class="font-bold text-xl text-[#222]">Mind Test Exam</h3>
-                        <p class="text-gray-400 text-sm">Monday, 20 April 2026 • 16.20</p>
-                      </div>
-                    </div>
-
-                    <div class="flex gap-2">
-                      <button class="w-10 h-10 rounded-lg bg-orange-100 text-[#FF6F29] hover:scale-110 transition">
-                        <i class="ri-pushpin-fill"></i>
-                      </button>
-
-                      <button class="w-10 h-10 rounded-lg bg-[#E9E0FF] text-[#7B5DFE] hover:scale-110 transition">
-                        <i class="ri-pencil-fill"></i>
-                      </button>
-
-                      <button class="w-10 h-10 rounded-lg border border-red-300 text-red-500 hover:scale-110 transition">
-                        <i class="ri-delete-bin-line"></i>
-                      </button>
-                    </div>
-                  </div>
-
-                  <!-- Copy Note Item ini untuk note lainnya -->
                 </div>
               </div>
             </div>
@@ -271,5 +158,56 @@
         </main>
       </div>
     </div>
+
+    <!-- Modal Add Category -->
+    <form  id="categoryModal" method="POST" action="{{ route('admin.category.update', $category->id) }}" class="fixed inset-0 bg-black/40 flex items-center justify-center z-50 hidden">
+        @csrf
+        @method('PUT')
+
+    <div class="bg-white w-[420px] rounded-[20px] border-2 border-gray-300 p-8 shadow-xl">
+
+      <!-- Title -->
+      <h1 class="text-2xl font-bold text-[#7B5DFE] mb-8">
+          Edit Category
+      </h1>
+
+      <!-- Input -->
+      <div class="flex items-center gap-4 mb-10">
+          <label class="text-xl font-semibold text-[#7B5DFE]">
+              Name:
+          </label>
+
+          <input type="text" name="name" value="{{ old('name', $category->name) }}" class="w-[280px] border-2 border-[#7B5DFE] rounded-xl px-4 py-2 text-base text-[#7B5DFE] focus:outline-none">
+      </div>
+
+      <!-- Button -->
+      <div class="flex justify-between gap-3 py-2">
+          <button type="button" id="closeModal" class="bg-gray-300 text-gray-700 px-20 py-2 rounded-lg text-sm">
+              Cancel
+          </button>
+
+          <button type="submit" class="bg-[#7B5DFE] text-white px-20 py-3 rounded-lg text-sm">
+              OK
+          </button>
+      </div>
+
+    </div>
+   </form>
+
+    {{-- JS --}}
+    <script>
+        const modal = document.getElementById('categoryModal');
+        const openBtn = document.getElementById('openModal');
+        const closeBtn = document.getElementById('closeModal');
+    
+        openBtn.addEventListener('click', () => {
+            modal.classList.remove('hidden');
+        });
+    
+        closeBtn.addEventListener('click', () => {
+            modal.classList.add('hidden');
+        });
+    </script>
+
   </body>
 </html>

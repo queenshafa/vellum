@@ -3,31 +3,42 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class NoteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index($id)
     {
-        return view('admin.notes.index');
+        $category = Category::findOrFail($id);
+        return view('admin.notes.index', compact('category'));
     }
 
     public function create()
     {
-        return view('admin.notes.index');
+        $categories = Category::all();
+        return view('admin.notes.create', compact('categories'));
     }
 
     public function store(Request $request)
     {
-        // logic simpan note
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required',
+            'category_id' => 'required|exists:categories,id',
+        ]);
+
+        \App\Models\Note::create($validated);
+
+        return redirect()
+            ->route('admin.notes.index')
+            ->with('success', 'Note berhasil ditambahkan');
     }
 
-    public function show(string $id)
+    public function show($id)
     {
-        return view('admin.notes.view');
+        $category = Category::findOrFail($id);
+        return view('admin.notes.index', compact('category'));
     }
 
     // public function edit(string $id)
