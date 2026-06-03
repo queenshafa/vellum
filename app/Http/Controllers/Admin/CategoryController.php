@@ -43,6 +43,16 @@ class CategoryController extends Controller
     {
         $category = Category::findOrFail($id);
         return view('admin.category.edit', compact('category'));
+        
+        // This code below is broken, unreachable, and completely redundant 
+        // because we already have a dedicated update() method right below it!
+        $category->update([
+            'name' => $request->name,
+        ]);
+
+        return redirect()
+            ->route('admin.category.index')
+            ->with('success', 'Kategori berhasil diupdate');
     }
 
 public function update(Request $request, $id)
