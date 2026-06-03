@@ -8,11 +8,19 @@
 @section('banner-subtitle', "Let's capture your thoughts and stay on top of everything.")
 
 @section('banner-actions')
-    <span class="self-start bg-white/10 backdrop-blur-md border border-white/30 rounded-full py-2 px-5 block">
-        <p class="text-sm text-white font-medium">
-            <i class="ri-calendar-line text-white/80 text-sm"></i> {{ now()->format('l, d M Y') }}
-        </p>
-    </span>
+    <div class="flex gap-2">
+        @if (request('category'))
+            <a href="#"
+                class="bg-white/20 backdrop-blur-sm border border-white/30 text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 hover:bg-white/30 transition">
+                <i class="ri-pencil-fill"></i> Edit Category
+            </a>
+        @endif
+
+        <a href="{{ route('notes.create') }}"
+            class="bg-[#7B5DFE] text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 hover:bg-[#6b4eeb] hover:scale-105 transition shadow-lg">
+            <i class="ri-add-line font-bold"></i> Add Note
+        </a>
+    </div>
 @endsection
 
 @section('content')

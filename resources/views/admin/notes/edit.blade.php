@@ -35,19 +35,20 @@
                             <i class="ri-folders-line text-primary text-lg"></i>
                         </div>
                     </div>
-                    <select name="category"
+
+                    <select name="category" required
                         class="w-full pl-14 pr-10 py-2.5 bg-white border border-gray-200 rounded-xl text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50/50 focus:outline-none focus:border-purple-400 appearance-none cursor-pointer">
                         <option value="">Choose category...</option>
-                        <!-- Added conditional checks to keep your selected option active -->
-                        <option value="study" {{ $note->category == 'study' ? 'selected' : '' }}>Study</option>
-                        <option value="travelling" {{ $note->category == 'travelling' ? 'selected' : '' }}>Travelling
-                        </option>
-                        <option value="work" {{ $note->category == 'work' ? 'selected' : '' }}>Work</option>
-                        <option value="personal" {{ $note->category == 'personal' ? 'selected' : '' }}>Personal</option>
-                        <option value="movie-review" {{ $note->category == 'movie-review' ? 'selected' : '' }}>Movie Review
-                        </option>
-                        <option value="groceries" {{ $note->category == 'groceries' ? 'selected' : '' }}>Groceries</option>
+                        @foreach ($categories as $cat)
+                            <option value="{{ $cat->name }}"
+                                {{ old('category', $note->category ?? '') == $cat->name ? 'selected' : '' }}>
+                                {{ ucfirst($cat->name) }}
+                            </option>
+                        @endforeach
                     </select>
+                    <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-gray-400">
+                        <i class="ri-arrow-down-s-line text-lg"></i>
+                    </div>
                 </div>
             </div>
 
@@ -59,8 +60,8 @@
                         id="titleCount">{{ strlen($note->title) }}/100</span>
                 </div>
                 <!-- Added value attribute to fill form with database string -->
-                <input type="text" name="title" id="noteTitle" value="{{ old('title', $note->title) }}"
-                    maxlength="100" placeholder="Enter note title..."
+                <input type="text" name="title" id="noteTitle" value="{{ old('title', $note->title) }}" maxlength="100"
+                    placeholder="Enter note title..."
                     oninput="document.getElementById('titleCount').textContent = this.value.length + '/100'"
                     class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl text-sm text-gray-800 placeholder:text-gray-300 shadow-sm focus:outline-none focus:border-purple-400 transition-colors"
                     required>

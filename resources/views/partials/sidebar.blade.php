@@ -10,7 +10,7 @@
                 class="flex items-center gap-4 px-4 py-4 rounded-lg text-sm font-medium bg-primary text-white hover:bg-[#F5F6FA] hover:text-primary transition-all">
                 <i class="ri-dashboard-line"></i>Dashboard
             </a>
-            <a href="{{ route('admin.category.index') }}"
+            <a href="{{ route('category.index') }}"
                 class="flex items-center gap-4 px-3 py-2 rounded-xl text-m font-medium hover:bg-[#F5F6FA] hover:text-[#7B5DFE] hover:rounded-full transition-all">
                 <i class="ri-menu-search-line"></i>Category
             </a>
@@ -27,12 +27,24 @@
         <div class="relative z-10 flex flex-col gap-3">
             <div
                 class="w-8 h-8 rounded-full bg-white/20 border border-white/40 flex items-center justify-center text-white text-xs font-semibold">
-                E</div>
-            <div>
-                <p class="text-white font-bold text-base leading-tight"><span class="font-extrabold">Eula</span>
-                    Lawrence</p>
-                <p class="text-white/60 text-xs mt-0.5">HRD / Admin</p>
+                {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
             </div>
+            <div>
+                {{-- First Name (Bold/Extrabold) --}}
+                <p class="text-white font-extrabold text-base leading-tight">
+                    {{ Str::before(auth()->user()->name, ' ') }}
+                </p>
+
+                {{-- Last Name (Subtext styling) --}}
+                <p class="text-white/60 text-xs mt-0.5">
+                    @if (Str::contains(auth()->user()->name, ' '))
+                        {{ Str::afterLast(auth()->user()->name, ' ') }}
+                    @else
+                        No Last Name
+                    @endif
+                </p>
+            </div>
+
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <button type="submit"

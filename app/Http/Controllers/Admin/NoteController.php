@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Note;
 use App\Models\Category;
+use App\Models\Note;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,33 +15,48 @@ class NoteController extends Controller
      */
     public function index(Request $request)
     {
-        // Start a query based on the logged-in user's relationship
-        $query = Auth::user()->notes();
+        $query = Note::query();
+        $category = null;
 
-        // If a folder/category parameter exists in the URL, filter the notes
+        // Check if the user is filtering notes via URL parameter (?category=Work i guess)
+        if ($request->has('category') && $request->category != '') {
+            
+            // 1. Fetch the category object by its string name so the View can use its properties
+            $category = Category::where('name', $request->category)->first();
+            
+            // 2. Query your actual column layout ('category' string field instead of 'category_id')
+            $query->where('category', $request->category);
+        }
+
+        // Always fetch the notes based on the evaluated query
+        $notes = $query->latest()->get();
+
+        return view('admin.notes.index', compact('notes', 'category'));
+    }
+
+    public function pinned(Request $request)
+    {
+        // Do the exact same safe fallback here
+        $query = Note::where('user_id', Auth::id())->where('is_pinned', true);
+
         if ($request->has('category') && $request->category != '') {
             $query->where('category', $request->category);
         }
 
-        // Gather the filtered notes, keeping pinned items at the top
-        $notes = $query->orderBy('is_pinned', 'desc')
-                       ->latest()
-                       ->get();
+        $notes = $query->latest()->get();
 
-        return view('admin.notes.index', compact('notes'));
-    }
-    public function index($id)
-    {
-        $category = Category::findOrFail($id);
-        return view('admin.notes.index', compact('category'));
+        return view('admin.notes.pinned', compact('notes'));
     }
 
     /**
      * Show the form for creating a new note.
      */
-    public function create()
+   public function create()
     {
-        $categories = Category::all();
+        // 1. Fetch all categories from the database
+        $categories = \App\Models\Category::all();
+
+        // 2. Pass them into the form view layout
         return view('admin.notes.create', compact('categories'));
     }
 
@@ -56,9 +71,8 @@ class NoteController extends Controller
             'category' => 'nullable|string|max:100',
         ]);
 
-        // Create the record explicitly using data from the Request object
         Note::create([
-            'user_id'   => Auth::id(), // Ties the note directly to the active session user
+            'user_id'   => Auth::id(),
             'title'     => $request->title,
             'body'      => $request->body,
             'category'  => $request->category,
@@ -74,40 +88,20 @@ class NoteController extends Controller
     public function show($id)
     {
         $note = Note::findOrFail($id);
-        
-        // Prevent cross-user access snooping
         abort_if($note->user_id !== Auth::id(), 403);
 
-        // Fetch the previous note (The first note created JUST BEFORE this one)
         $previousNote = Note::where('user_id', Auth::id())
                             ->where('id', '<', $note->id)
                             ->orderBy('id', 'desc')
                             ->first();
 
-        // Fetch the next note (The first note created JUST AFTER this one)
         $nextNote = Note::where('user_id', Auth::id())
                         ->where('id', '>', $note->id)
                         ->orderBy('id', 'asc')
                         ->first();
 
+        // FIXED: points to admin.notes.view matching your file structure tree!
         return view('admin.notes.view', compact('note', 'previousNote', 'nextNote'));
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required',
-            'category_id' => 'required|exists:categories,id',
-        ]);
-
-        \App\Models\Note::create($validated);
-
-        return redirect()
-            ->route('admin.notes.index')
-            ->with('success', 'Note berhasil ditambahkan');
-    }
-
-    public function show($id)
-    {
-        $category = Category::findOrFail($id);
-        return view('admin.notes.index', compact('category'));
     }
 
     /**
@@ -137,7 +131,6 @@ class NoteController extends Controller
             'category' => 'nullable|string|max:100',
         ]);
 
-        // Explicit assignment update block matching your style preference
         $note->update([
             'title'    => $request->title,
             'body'     => $request->body,
@@ -175,25 +168,5 @@ class NoteController extends Controller
         ]);
 
         return back()->with('success', $note->is_pinned ? 'Note pinned!' : 'Note unpinned!');
-    }
-
-    /**
- * Display a listing of only the pinned notes.
- */
-    public function pinned(Request $request)
-    {
-        // Start with the logged-in user's notes relationship query scope
-        $query = Auth::user()->notes()->where('is_pinned', true);
-
-        // If your pin notes layout handles category switching down the line, catch it here
-        if ($request->has('category') && $request->category != '') {
-            $query->where('category', $request->category);
-        }
-
-        // Get latest pinned items
-        $notes = $query->latest()->get();
-
-        // Points right to your newly-created pinned blade file
-        return view('admin.notes.pinned', compact('notes'));
     }
 }

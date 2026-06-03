@@ -26,16 +26,24 @@
                             <i class="ri-folders-line text-primary text-lg"></i>
                         </div>
                     </div>
-                    <select name="category"
+
+                    <select name="category" required
                         class="w-full pl-14 pr-10 py-2.5 bg-white border border-gray-200 rounded-xl text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50/50 focus:outline-none focus:border-purple-400 appearance-none cursor-pointer">
                         <option value="">Choose category...</option>
-                        <option value="study">Study</option>
-                        <option value="travelling">Travelling</option>
-                        <option value="work">Work</option>
-                        <option value="personal">Personal</option>
-                        <option value="movie-review">Movie Review</option>
-                        <option value="groceries">Groceries</option>
+
+                        {{-- Dynamic Category Loop --}}
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->name }}"
+                                {{ old('category') == $category->name ? 'selected' : '' }}>
+                                {{ ucfirst($category->name) }}
+                            </option>
+                        @endforeach
                     </select>
+
+                    {{-- Arrow icon indicator --}}
+                    <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-gray-400">
+                        <i class="ri-arrow-down-s-line text-lg"></i>
+                    </div>
                 </div>
             </div>
 
