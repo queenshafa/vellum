@@ -29,8 +29,6 @@
                     <select name="category" required
                         class="w-full pl-14 pr-10 py-2.5 bg-white border {{ $errors->has('category') ? 'border-red-500 focus:border-red-500' : 'border-gray-200 focus:border-purple-400' }} rounded-xl text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50/50 focus:outline-none appearance-none cursor-pointer">
                         <option value="">Choose category...</option>
-
-                        {{-- Dynamic Category Loop --}}
                         @foreach ($categories as $category)
                             <option value="{{ $category->name }}"
                                 {{ old('category') == $category->name ? 'selected' : '' }}>
@@ -39,7 +37,6 @@
                         @endforeach
                     </select>
 
-                    {{-- Arrow icon indicator --}}
                     <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-gray-400">
                         <i class="ri-arrow-down-s-line text-lg"></i>
                     </div>
@@ -67,32 +64,6 @@
             <div class="space-y-2">
                 <label class="text-xl font-semibold capitalize text-black shrink-0">Note Content</label>
                 <div class="border-2 rounded-xl overflow-hidden shadow-sm transition-colors">
-                    <div class="flex items-center gap-4 px-4 py-2 bg-white border-b border-gray-100 text-gray-400 text-sm">
-                        <button type="button" class="font-bold hover:text-gray-700 transition-colors px-1 text-base">
-                            <i class="ri-bold"></i>
-                        </button>
-                        <button type="button"
-                            class="italic hover:text-gray-700 transition-colors px-1 text-base font-serif">
-                            <i class="ri-italic"></i>
-                        </button>
-                        <button type="button" class="hover:text-gray-700 transition-colors px-1 text-base">
-                            <i class="ri-underline"></i>
-                        </button>
-                        <div class="w-px h-4 bg-gray-200 mx-1"></div>
-                        <button type="button" class="hover:text-gray-700 transition-colors">
-                            <i class="ri-list-check"></i>
-                        </button>
-                        <button type="button" class="hover:text-gray-700 transition-colors">
-                            <i class="ri-list-unordered"></i>
-                        </button>
-                        <div class="w-px h-4 bg-gray-200 mx-1"></div>
-                        <button type="button" class="hover:text-gray-700 transition-colors">
-                            <i class="ri-link"></i>
-                        </button>
-                        <button type="button" class="hover:text-gray-700 transition-colors">
-                            <i class="ri-file-image-line"></i>
-                        </button>
-                    </div>
                     <textarea name="body" placeholder="Write your note here..."
                         class="w-full px-4 py-4 min-h-52 bg-white text-sm text-gray-800 placeholder:text-gray-300 focus:outline-none focus:ring-0 border-0 resize-none leading-relaxed block">{{ old('body') }}</textarea>
                 </div>

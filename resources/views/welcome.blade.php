@@ -47,23 +47,10 @@
             class="flex md:hidden w-full max-w-sm bg-white/90 backdrop-blur-md rounded-2xl shadow-lg overflow-hidden flex-col">
             <div class="flex items-center justify-between px-5 py-4">
                 <a href="#" class="flex-shrink-0">
-                    <svg class="logo-svg" viewBox="0 0 90 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4 28 C4 28 6 10 10 10 C13 10 13 20 15 20 C17 20 18 10 21 10 C24 10 25 28 25 28"
-                            stroke="#111" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                            fill="none" />
-                        <path d="M30 24 C30 20 30 12 33 10 C36 8 39 10 40 14 C41 18 40 22 40 24" stroke="#111"
-                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
-                        <path d="M33 18 C35 17 38 17 40 18" stroke="#111" stroke-width="2" stroke-linecap="round"
-                            fill="none" />
-                        <path d="M40 14 C42 10 46 9 48 12 C50 15 48 19 45 20 C47 21 51 24 52 28" stroke="#111"
-                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
-                        <path d="M57 13 C57 13 62 11 66 14 C70 17 68 22 64 23 C61 24 58 23 57 21" stroke="#111"
-                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
-                        <path d="M57 21 C56 24 57 27 60 28 C63 29 67 27 68 25" stroke="#111" stroke-width="2.5"
-                            stroke-linecap="round" stroke-linejoin="round" fill="none" />
-                        <line x1="4" y1="33" x2="70" y2="33" stroke="#111"
-                            stroke-width="1.5" stroke-linecap="round" />
-                    </svg>
+                    <img class="logo-svg" viewBox="0 0 90 36" fill="none"
+                        xmlns="{{ asset('assets/vellum-logo.svg') }}"
+                        class="w-10 invert sepia saturate-500 hue-rotate-20">
+                    </img>
                 </a>
                 <button @click="open = !open" class="text-gray-500 hover:text-gray-800 transition-colors p-1">
                     <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"

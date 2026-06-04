@@ -11,16 +11,19 @@ use Illuminate\Support\Facades\Auth;
 class NoteController extends Controller
 {
     public function index(Request $request) {
-        $query = Note::where('user_id', Auth::id());
+        $categories = Category::where('user_id', Auth::id())->get();
         $category = null;
 
-        if ($request->has('category') && $request->category != '') {
-            $category = Category::where('user_id', Auth::id())->where('name', $request->category)->first();
+        $query = Note::where('user_id', Auth::id());
+
+        if ($request->filled('category')) {
+            $category = Category::where('user_id', Auth::id())
+                                ->where('name', $request->category)  // matching by name since you pass name
+                                ->first();
+
             $query->where('category', $request->category);
         }
 
-        // FIXED: Only get categories belonging to this user
-        $categories = Category::where('user_id', Auth::id())->get();
         $notes = $query->orderBy('is_pinned', 'desc')->latest()->get();
 
         return view('admin.notes.index', compact('notes', 'categories', 'category'));
@@ -39,7 +42,6 @@ class NoteController extends Controller
     }
 
     public function create() {
-        // FIXED: Only let the user select from their own categories
         $categories = Category::where('user_id', Auth::id())->get();
 
         return view('admin.notes.create', compact('categories'));
@@ -47,7 +49,6 @@ class NoteController extends Controller
 
     public function store(Request $request)
     {
-        // FIXED: Validate that the chosen category actually belongs to this user
         $validated = $request->validate([
             'category' => 'required|string|exists:categories,name,user_id,' . Auth::id(), 
             'title'    => 'required|string|max:100',               
@@ -90,8 +91,6 @@ class NoteController extends Controller
 
     public function edit($id) {
         $note = Note::where('user_id', Auth::id())->findOrFail($id);
-        
-        // FIXED: Only fetch categories belonging to this user
         $categories = Category::where('user_id', Auth::id())->get();
 
         return view('admin.notes.edit', compact('note', 'categories'));
@@ -100,8 +99,6 @@ class NoteController extends Controller
     public function update(Request $request, $id) {
         $note = Note::findOrFail($id);
         abort_if($note->user_id !== Auth::id(), 403);
-
-        // FIXED: Prevent tying notes to other users' categories
         $request->validate([
             'title'    => 'required|string|max:100',
             'body'     => 'nullable|string',

@@ -21,7 +21,7 @@
                 @method('DELETE')
                 <button type="submit"
                     class="w-10 h-10 rounded-lg bg-red-500 text-white border border-red-200 flex items-center justify-center hover:bg-red-50 hover:text-red-500 transition">
-                    <i class="ri-delete-bin-line"></i> Delete
+                    <i class="ri-delete-bin-line"></i>
                 </button>
             </form>
         @elseif (request('category') && $notes->first() && $notes->first()->category_id)

@@ -89,4 +89,51 @@
 
         </div>
     </div>
+
+    <!-- Modal Add Category -->
+    <div id="categoryModal" class="fixed inset-0 bg-black/40 flex items-center justify-center z-50 hidden">
+        <form method="POST" action="{{ route('category.store') }}"
+            class="bg-white w-[420px] rounded-[20px] border-2 border-gray-300 p-8 shadow-xl">
+            @csrf
+
+            <h1 class="text-2xl font-bold text-[#7B5DFE] mb-8">
+                New Category
+            </h1>
+
+            <div class="flex items-center gap-4 mb-10">
+                <label class="text-xl font-semibold text-[#7B5DFE]">
+                    Name:
+                </label>
+                <input type="text" name="name" required placeholder="New Category"
+                    class="w-[280px] border-2 border-[#7B5DFE] rounded-xl px-4 py-2 text-base text-[#7B5DFE] focus:outline-none">
+            </div>
+
+            <div class="flex justify-between gap-3 py-2">
+                <button type="button" id="closeModal" class="bg-gray-300 text-gray-700 px-6 py-2 rounded-lg text-sm">
+                    Cancel
+                </button>
+                <button type="submit" class="bg-[#7B5DFE] text-white px-6 py-3 rounded-lg text-sm">
+                    OK
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const modal = document.getElementById('categoryModal');
+        const openBtn = document.getElementById('openModal');
+        const closeBtn = document.getElementById('closeModal');
+
+        if (openBtn && modal) {
+            openBtn.addEventListener('click', () => {
+                modal.classList.remove('hidden');
+            });
+        }
+
+        if (closeBtn && modal) {
+            closeBtn.addEventListener('click', () => {
+                modal.classList.add('hidden');
+            });
+        }
+    </script>
 @endsection

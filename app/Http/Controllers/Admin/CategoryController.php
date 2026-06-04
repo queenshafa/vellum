@@ -14,8 +14,14 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::where('user_id', Auth::id())
-            ->withCount('notes')
-            ->get();
+            ->get()
+            ->map(function ($category) {
+                $category->notes_count = \App\Models\Note::where('user_id', Auth::id())
+                    ->where('category', $category->name)
+                    ->count();
+                    
+                return $category;
+            });
         
         return view('admin.categories.index', compact('categories'));
     }
@@ -88,6 +94,6 @@ class CategoryController extends Controller
         $category->delete();
 
         return redirect()->route('category.index')
-            ->with('success', 'Category and matching notes detached successfully!');
+            ->with('success', 'Category and matching notes deleted successfully!');
     }
 }
