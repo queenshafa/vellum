@@ -6,23 +6,15 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-// Public Landing Page
 Route::get('/', function () {
     return view('welcome');
 });
 
-// FIXED: Adjusted the dot-notation path to look inside your "admin" directory!
-Route::get('/dashboard', function () {
-    $notes = \App\Models\Note::where('user_id', Auth::id())
-        ->orderBy('is_pinned', 'desc')
-        ->latest()
-        ->get();
+Route::get('/dashboard', [NoteController::class, 'dashboard'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
-    return view('dashboard', compact('notes')); 
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-
-// Kelola Notes (Manage Notes)
+// Notes
 Route::middleware(['auth', 'verified'])->controller(NoteController::class)->group(function() {
     Route::get('notes/pinned', 'pinned')->name('notes.pinned');
     Route::get('notes/index', 'index')->name('notes.index');
@@ -36,21 +28,18 @@ Route::middleware(['auth', 'verified'])->controller(NoteController::class)->grou
 });
 
 
-// Kelola Kategori (Manage Categories)
-
+// Categories
 Route::middleware(['auth', 'verified'])->controller(CategoryController::class)->group(function() {
     Route::get('/category', 'index')->name('category.index');
     Route::get('/category/create', 'create')->name('category.create');
     Route::post('/category', 'store')->name('category.store');
     Route::get('/category/edit/{id}', 'edit')->name('category.edit');
-    
-    // Kept standard and simple
     Route::put('/category/{id}', 'update')->name('category.update'); 
     Route::delete('/category/{id}', 'destroy')->name('category.destroy'); 
 });
 
 
-// Kelola Profile (Manage Profile)
+// Profile
 Route::middleware('auth')->controller(ProfileController::class)->group(function() {
     Route::get('/profile', 'edit')->name('profile.edit');
     Route::patch('/profile', 'update')->name('profile.update');

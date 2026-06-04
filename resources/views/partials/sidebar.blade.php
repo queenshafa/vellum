@@ -7,15 +7,26 @@
 
         <nav class="space-y-2">
             <a href="{{ route('dashboard') }}"
-                class="flex items-center gap-4 px-4 py-4 rounded-lg text-sm font-medium bg-primary text-white hover:bg-[#F5F6FA] hover:text-primary transition-all">
+                class="flex items-center gap-4 px-4 py-3 rounded-xl text-sm font-medium transition-all
+                {{ request()->routeIs('dashboard')
+                    ? 'bg-primary text-white shadow-sm'
+                    : 'text-gray-500 hover:bg-[#F5F6FA] hover:text-[#7B5DFE]' }}">
                 <i class="ri-dashboard-line"></i>Dashboard
             </a>
+
             <a href="{{ route('category.index') }}"
-                class="flex items-center gap-4 px-3 py-2 rounded-xl text-m font-medium hover:bg-[#F5F6FA] hover:text-[#7B5DFE] hover:rounded-full transition-all">
+                class="flex items-center gap-4 px-4 py-3 rounded-xl text-sm font-medium transition-all
+                {{ request()->routeIs('category.*')
+                    ? 'bg-primary text-white shadow-sm'
+                    : 'text-gray-500 hover:bg-[#F5F6FA] hover:text-[#7B5DFE]' }}">
                 <i class="ri-menu-search-line"></i>Category
             </a>
+
             <a href="{{ route('notes.pinned') }}"
-                class="flex items-center gap-4 px-3 py-2 rounded-xl text-m font-medium hover:bg-[#F5F6FA] hover:text-[#7B5DFE] hover:rounded-full transition-all">
+                class="flex items-center gap-4 px-4 py-3 rounded-xl text-sm font-medium transition-all
+                {{ request()->routeIs('notes.pinned')
+                    ? 'bg-primary text-white shadow-sm'
+                    : 'text-gray-500 hover:bg-[#F5F6FA] hover:text-[#7B5DFE]' }}">
                 <i class="ri-pushpin-line"></i>Pinned Notes
             </a>
         </nav>
@@ -30,12 +41,9 @@
                 {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
             </div>
             <div>
-                {{-- First Name (Bold/Extrabold) --}}
                 <p class="text-white font-extrabold text-base leading-tight">
                     {{ Str::before(auth()->user()->name, ' ') }}
                 </p>
-
-                {{-- Last Name (Subtext styling) --}}
                 <p class="text-white/60 text-xs mt-0.5">
                     @if (Str::contains(auth()->user()->name, ' '))
                         {{ Str::afterLast(auth()->user()->name, ' ') }}

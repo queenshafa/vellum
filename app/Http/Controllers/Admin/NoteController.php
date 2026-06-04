@@ -10,33 +10,23 @@ use Illuminate\Support\Facades\Auth;
 
 class NoteController extends Controller
 {
-    /**
-     * Display a listing of the notes.
-     */
-    public function index(Request $request)
-    {
-        $query = Note::query();
+    public function index(Request $request) {
+        $query = Note::where('user_id', Auth::id());
         $category = null;
 
-        // Check if the user is filtering notes via URL parameter (?category=Work i guess)
         if ($request->has('category') && $request->category != '') {
-            
-            // 1. Fetch the category object by its string name so the View can use its properties
-            $category = Category::where('name', $request->category)->first();
-            
-            // 2. Query your actual column layout ('category' string field instead of 'category_id')
+            $category = Category::where('user_id', Auth::id())->where('name', $request->category)->first();
             $query->where('category', $request->category);
         }
 
-        // Always fetch the notes based on the evaluated query
-        $notes = $query->latest()->get();
+        // FIXED: Only get categories belonging to this user
+        $categories = Category::where('user_id', Auth::id())->get();
+        $notes = $query->orderBy('is_pinned', 'desc')->latest()->get();
 
-        return view('admin.notes.index', compact('notes', 'category'));
+        return view('admin.notes.index', compact('notes', 'categories', 'category'));
     }
 
-    public function pinned(Request $request)
-    {
-        // Do the exact same safe fallback here
+    public function pinned(Request $request) {
         $query = Note::where('user_id', Auth::id())->where('is_pinned', true);
 
         if ($request->has('category') && $request->category != '') {
@@ -48,45 +38,40 @@ class NoteController extends Controller
         return view('admin.notes.pinned', compact('notes'));
     }
 
-    /**
-     * Show the form for creating a new note.
-     */
-   public function create()
-    {
-        // 1. Fetch all categories from the database
-        $categories = \App\Models\Category::all();
+    public function create() {
+        // FIXED: Only let the user select from their own categories
+        $categories = Category::where('user_id', Auth::id())->get();
 
-        // 2. Pass them into the form view layout
         return view('admin.notes.create', compact('categories'));
     }
 
-    /**
-     * Store a newly created note in storage.
-     */
     public function store(Request $request)
     {
-        $request->validate([
-            'title'    => 'required|string|max:100',
-            'body'     => 'nullable|string',
-            'category' => 'nullable|string|max:100',
+        // FIXED: Validate that the chosen category actually belongs to this user
+        $validated = $request->validate([
+            'category' => 'required|string|exists:categories,name,user_id,' . Auth::id(), 
+            'title'    => 'required|string|max:100',               
+            'body'     => 'required|string|min:5',                 
+        ], [
+            'category.required' => 'Category is required.',
+            'category.exists'   => 'Selected category is invalid.',
+            'title.required'    => 'Title is required.',
+            'title.max'         => 'Title is too long. Max 100 characters.',
+            'body.required'     => 'Content is required.',
+            'body.min'          => 'Fill at least 5 words.',
         ]);
 
         Note::create([
-            'user_id'   => Auth::id(),
-            'title'     => $request->title,
-            'body'      => $request->body,
-            'category'  => $request->category,
-            'is_pinned' => false,
+            'user_id'  => Auth::id(),
+            'category' => $validated['category'],
+            'title'    => $validated['title'],
+            'body'     => $validated['body'],
         ]);
 
-        return redirect()->route('notes.index')->with('success', 'Note created successfully!');
+        return redirect()->route('notes.index')->with('success', 'Note successfully captured!');
     }
 
-    /**
-     * Display the specified note.
-     */
-    public function show($id)
-    {
+    public function show($id) {
         $note = Note::findOrFail($id);
         abort_if($note->user_id !== Auth::id(), 403);
 
@@ -100,35 +85,27 @@ class NoteController extends Controller
                         ->orderBy('id', 'asc')
                         ->first();
 
-        // FIXED: points to admin.notes.view matching your file structure tree!
         return view('admin.notes.view', compact('note', 'previousNote', 'nextNote'));
     }
 
-    /**
-     * Show the form for editing the specified note.
-     */
-    public function edit($id)
-    {
-        $note = Note::findOrFail($id);
+    public function edit($id) {
+        $note = Note::where('user_id', Auth::id())->findOrFail($id);
         
-        abort_if($note->user_id !== Auth::id(), 403);
+        // FIXED: Only fetch categories belonging to this user
+        $categories = Category::where('user_id', Auth::id())->get();
 
-        return view('admin.notes.edit', compact('note'));
+        return view('admin.notes.edit', compact('note', 'categories'));
     }
 
-    /**
-     * Update the specified note in storage.
-     */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         $note = Note::findOrFail($id);
-        
         abort_if($note->user_id !== Auth::id(), 403);
 
+        // FIXED: Prevent tying notes to other users' categories
         $request->validate([
             'title'    => 'required|string|max:100',
             'body'     => 'nullable|string',
-            'category' => 'nullable|string|max:100',
+            'category' => 'nullable|string|max:100|exists:categories,name,user_id,' . Auth::id(),
         ]);
 
         $note->update([
@@ -140,33 +117,39 @@ class NoteController extends Controller
         return redirect()->route('notes.index')->with('success', 'Note updated successfully!');
     }
 
-    /**
-     * Remove the specified note from storage.
-     */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         $note = Note::findOrFail($id);
-        
         abort_if($note->user_id !== Auth::id(), 403);
-        
         $note->delete();
 
         return redirect()->route('notes.index')->with('success', 'Note deleted successfully!');
     }
 
-    /**
-     * Toggle the pinned status of a note.
-     */
     public function togglePin($id)
     {
         $note = Note::findOrFail($id);
-        
         abort_if($note->user_id !== Auth::id(), 403);
-
         $note->update([
             'is_pinned' => !$note->is_pinned
         ]);
 
         return back()->with('success', $note->is_pinned ? 'Note pinned!' : 'Note unpinned!');
+    }
+
+    public function dashboard()
+    {
+        $userId = Auth::id();
+        $totalNotes = Note::where('user_id', $userId)->count();
+        $pinnedNotes = Note::where('user_id', $userId)->where('is_pinned', true)->count();
+        $totalCategories = Category::where('user_id', $userId)->count();
+        $categories = Category::where('user_id', $userId)->get();
+
+        $notes = Note::where('user_id', $userId)
+            ->orderBy('is_pinned', 'desc')
+            ->latest()
+            ->take(5)
+            ->get();
+
+        return view('dashboard', compact('totalNotes', 'pinnedNotes', 'totalCategories', 'categories', 'notes'));
     }
 }

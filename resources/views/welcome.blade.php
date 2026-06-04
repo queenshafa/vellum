@@ -15,9 +15,9 @@
 </head>
 
 <body class="font-plus-jakarta-sans">
-    <!-- NAVBAR -->
+    <!-- Navbar -->
     <header class="fixed top-4 left-0 right-0 z-50 flex justify-center px-4" x-data="{ open: false }">
-        <!-- DESKTOP pill -->
+        <!-- Desktop -->
         <nav
             class="hidden md:flex w-full max-w-2xl bg-white/90 backdrop-blur-md rounded-full shadow-lg px-3 py-3 items-center justify-between">
             <a href="#" class="flex-shrink-0">
@@ -42,7 +42,7 @@
             </div>
         </nav>
 
-        <!-- MOBILE card -->
+        <!-- Mobile -->
         <nav
             class="flex md:hidden w-full max-w-sm bg-white/90 backdrop-blur-md rounded-2xl shadow-lg overflow-hidden flex-col">
             <div class="flex items-center justify-between px-5 py-4">

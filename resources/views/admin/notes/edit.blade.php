@@ -1,32 +1,23 @@
 @extends('layouts.app')
 
-<!-- Page tab title -->
 @section('title', 'Edit Note: ' . $note->title . ' | Vellum')
-
-<!-- Changed banner title to dynamically show the notes title -->
 @section('banner-title')
     Editing: {{ $note->title }}
 @endsection
-
 @section('banner-subtitle')
     Last updated on {{ $note->updated_at->format('d/m/Y \a\t H.i') }}
 @endsection
-
 @section('banner-actions')
     <a href="{{ route('notes.index') }}"
         class="inline-flex items-center gap-1.5 px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/80 transition">
         Cancel
     </a>
 @endsection
-
 @section('content')
     <div class="overflow-y-auto flex-1 px-8 py-8">
-        <!-- Changed method to route to your manual notes.update endpoint -->
         <form class="space-y-5" method="POST" action="{{ route('notes.update', $note) }}">
             @csrf
-            @method('PUT') <!-- HTML forms do not natively support PUT, Laravel binds this injection tag -->
-
-            <!-- Pilih Category -->
+            <!-- Category -->
             <div class="space-y-2">
                 <label class="text-xl font-semibold capitalize text-black shrink-0">Category</label>
                 <div class="relative">
@@ -59,7 +50,6 @@
                     <span class="text-[11px] text-gray-400 font-medium"
                         id="titleCount">{{ strlen($note->title) }}/100</span>
                 </div>
-                <!-- Added value attribute to fill form with database string -->
                 <input type="text" name="title" id="noteTitle" value="{{ old('title', $note->title) }}" maxlength="100"
                     placeholder="Enter note title..."
                     oninput="document.getElementById('titleCount').textContent = this.value.length + '/100'"
@@ -73,7 +63,7 @@
                 <div
                     class="border-2 border-gray-100 rounded-xl overflow-hidden shadow-sm focus-within:border-primary transition-colors">
                     <!-- Toolbar -->
-                    <div class="flex items-center gap-4 px-4 py-2 bg-white border-b border-gray-100 text-gray-400 text-sm">
+                    {{-- <div class="flex items-center gap-4 px-4 py-2 bg-white border-b border-gray-100 text-gray-400 text-sm">
                         <button type="button" class="font-bold hover:text-gray-700 transition-colors px-1 text-base"><i
                                 class="ri-bold"></i></button>
                         <button type="button"
@@ -91,7 +81,7 @@
                                 class="ri-link"></i></button>
                         <button type="button" class="hover:text-gray-700 transition-colors"><i
                                 class="ri-file-image-line"></i></button>
-                    </div>
+                    </div> --}}
                     <!-- Fixed inline spacing issue inside the textarea container -->
                     <textarea name="body" placeholder="Write your note here..."
                         class="w-full px-4 py-4 min-h-52 bg-white text-sm text-gray-800 placeholder:text-gray-300 focus:outline-none focus:ring-0 border-0 resize-none leading-relaxed block">{{ old('body', $note->body) }}</textarea>

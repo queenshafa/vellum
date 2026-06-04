@@ -9,12 +9,10 @@
 
 @section('banner-actions')
     <div class="flex gap-2">
-        @if (request('category'))
-            <a href="#"
-                class="bg-white/20 backdrop-blur-sm border border-white/30 text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 hover:bg-white/30 transition">
-                <i class="ri-pencil-fill"></i> Edit Category
-            </a>
-        @endif
+        <button id="openModal"
+            class="bg-[#7B5DFE] text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 hover:bg-[#6b4eeb] hover:scale-105 transition shadow-lg">
+            <i class="ri-add-line font-bold"></i> Add Category
+        </button>
 
         <a href="{{ route('notes.create') }}"
             class="bg-[#7B5DFE] text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 hover:bg-[#6b4eeb] hover:scale-105 transition shadow-lg">
@@ -26,43 +24,23 @@
 @section('content')
     <div class="px-8 pt-8 shrink-0">
         <div class="mb-8">
-            <h1 class="text-xl font-semibold capitalize text-black mb-4">Folders</h1>
+            <h1 class="text-xl font-semibold capitalize text-black mb-4">Categories</h1>
             <div class="grid grid-cols-1 md:grid-cols-5 gap-3">
-                <a href="{{ route('notes.index', ['category' => 'travelling']) }}">
+                <a href="{{ route('notes.index') }}">
                     <div
                         class="bg-primary rounded-xl shadow-sm py-4 px-4 flex items-center justify-between gap-4 hover:opacity-90 transition">
-                        <p class="text-sm text-white font-medium tracking-tight">Travelling</p>
-                        <span class="bg-white py-0.5 px-1.5 rounded-sm"><i class="ri-edit-fill text-primary"></i></span>
+                        <p class="text-sm text-white font-medium tracking-tight">All Notes</p>
                     </div>
                 </a>
-                <a href="{{ route('notes.index', ['category' => 'movie-review']) }}">
-                    <div
-                        class="bg-primary rounded-xl shadow-sm py-4 px-4 flex items-center justify-between gap-4 hover:opacity-90 transition">
-                        <p class="text-sm text-white font-medium tracking-tight">Movie Review</p>
-                        <span class="bg-white py-0.5 px-1.5 rounded-sm"><i class="ri-edit-fill text-primary"></i></span>
-                    </div>
-                </a>
-                <a href="{{ route('notes.index', ['category' => 'study']) }}">
-                    <div
-                        class="bg-primary rounded-xl shadow-sm py-4 px-4 flex items-center justify-between gap-4 hover:opacity-90 transition">
-                        <p class="text-sm text-white font-medium tracking-tight">Study Notes</p>
-                        <span class="bg-white py-0.5 px-1.5 rounded-sm"><i class="ri-edit-fill text-primary"></i></span>
-                    </div>
-                </a>
-                <a href="{{ route('notes.index', ['category' => 'work']) }}">
-                    <div
-                        class="bg-primary rounded-xl shadow-sm py-4 px-4 flex items-center justify-between gap-4 hover:opacity-90 transition">
-                        <p class="text-sm text-white font-medium tracking-tight">Work</p>
-                        <span class="bg-white py-0.5 px-1.5 rounded-sm"><i class="ri-edit-fill text-primary"></i></span>
-                    </div>
-                </a>
-                <a href="{{ route('notes.index', ['category' => 'personal']) }}">
-                    <div
-                        class="bg-primary rounded-xl shadow-sm py-4 px-4 flex items-center justify-between gap-4 hover:opacity-90 transition">
-                        <p class="text-sm text-white font-medium tracking-tight">Personal</p>
-                        <span class="bg-white py-0.5 px-1.5 rounded-sm"><i class="ri-edit-fill text-primary"></i></span>
-                    </div>
-                </a>
+                @forelse ($categories as $cat)
+                    <a href="{{ route('notes.index', ['category' => $cat->name]) }}">
+                        <div
+                            class="bg-primary rounded-xl shadow-sm py-4 px-4 flex items-center justify-between gap-4 hover:opacity-90 transition">
+                            <p class="text-sm text-white font-medium tracking-tight">{{ $cat->name }}</p>
+                        </div>
+                    </a>
+                @empty
+                @endforelse
             </div>
         </div>
 
@@ -103,14 +81,9 @@
                     </div>
                 </div>
             @empty
-                <div
-                    class="col-span-1 md:col-span-3 text-center py-12 text-gray-400 bg-gray-50/50 border border-dashed rounded-2xl">
-                    <i class="ri-chat-history-line text-4xl block mb-2 text-gray-300"></i>
+                <div class="col-span-1 md:col-span-3 text-center py-12 text-gray-400">
                     <p class="text-sm font-medium">You haven't added any notes yet.</p>
-                    <a href="{{ route('notes.create') }}"
-                        class="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-[#7B5DFE] hover:underline">
-                        Create your first note &rarr;
-                    </a>
+
                 </div>
             @endforelse
 

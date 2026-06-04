@@ -1,19 +1,14 @@
 @extends('layouts.app')
 
 @section('title', 'Notes | Vellum')
-
 @section('banner-title')
     {{ isset($category) ? $category->name : (request('category') ? ucfirst(request('category')) : 'All Notes') }}
 @endsection
-
 @section('banner-subtitle')
     {{ $notes->count() }} {{ Str::plural('Note', $notes->count()) }}
 @endsection
-
 @section('banner-actions')
     <div class="flex gap-2 items-center">
-
-        {{-- Check for a Model object OR check if a category is being requested via the URL query --}}
         @if (isset($category) && $category)
             <button id="openModal"
                 class="bg-white/20 backdrop-blur-sm border border-white/30 text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 hover:bg-white/30 transition">
@@ -25,12 +20,11 @@
                 @csrf
                 @method('DELETE')
                 <button type="submit"
-                    class="bg-red-500/20 backdrop-blur-sm border border-red-500/30 text-red-200 px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 hover:bg-red-600 hover:text-white transition">
+                    class="w-10 h-10 rounded-lg bg-red-500 text-white border border-red-200 flex items-center justify-center hover:bg-red-50 hover:text-red-500 transition">
                     <i class="ri-delete-bin-line"></i> Delete
                 </button>
             </form>
         @elseif (request('category') && $notes->first() && $notes->first()->category_id)
-            {{-- Safe fallback: If accessed via query string (?category=...), grab the relation details from the loaded notes --}}
             <button id="openModal"
                 class="bg-white/20 backdrop-blur-sm border border-white/30 text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 hover:bg-white/30 transition">
                 <i class="ri-pencil-fill"></i> Edit Category
@@ -129,8 +123,6 @@
 
     @if (isset($category) && $category)
         <div id="categoryModal" class="fixed inset-0 bg-black/40 flex items-center justify-center z-50 hidden">
-
-            {{-- CRITICAL: Ensure action targets category.update and method is properly spoofed to PUT --}}
             <form method="POST" action="{{ route('category.update', $category->id) }}"
                 class="bg-white w-[420px] rounded-[20px] border-2 border-gray-300 p-8 shadow-xl">
                 @csrf
@@ -140,8 +132,6 @@
 
                 <div class="flex items-center gap-4 mb-10">
                     <label class="text-xl font-semibold text-[#7B5DFE]">Name:</label>
-
-                    {{-- FIXED: Added explicit name="name" and strict value tracking attribute bindings --}}
                     <input type="text" name="name" required value="{{ old('name', $category->name) }}"
                         class="w-[280px] border-2 border-[#7B5DFE] rounded-xl px-4 py-2 text-base text-[#7B5DFE] focus:outline-none">
                 </div>
@@ -159,7 +149,6 @@
             </form>
         </div>
 
-        {{-- Script Controller Initialization Context Node --}}
         <script>
             const modal = document.getElementById('categoryModal');
             const openBtn = document.getElementById('openModal');

@@ -9,23 +9,6 @@
 @section('banner-subtitle')
     {{ $notes->count() }} {{ Str::plural('Note', $notes->count()) }}
 @endsection
-
-{{-- @section('banner-actions')
-    <div class="flex gap-2">
-        @if (request('category'))
-            <a href="#"
-                class="bg-white/20 backdrop-blur-sm border border-white/30 text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 hover:bg-white/30 transition">
-                <i class="ri-pencil-fill"></i> Edit Category
-            </a>
-        @endif
-
-        <a href="{{ route('notes.create') }}"
-            class="bg-[#7B5DFE] text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 hover:bg-[#6b4eeb] hover:scale-105 transition shadow-lg">
-            <i class="ri-add-line font-bold"></i> Add Note
-        </a>
-    </div>
-@endsection --}}
-
 @section('content')
     <div class="px-8 pt-8 flex-1 overflow-hidden">
 
@@ -49,7 +32,6 @@
                             <div>
                                 <h3 class="font-bold text-xl text-[#222] flex items-center gap-2">
                                     {{ $note->title }}
-                                    <!-- Add a pin badge next to the title if pinned -->
                                     @if ($note->is_pinned)
                                         <i class="ri-pushpin-fill text-sm text-[#FF6F29]" title="Pinned Note"></i>
                                     @endif
@@ -65,10 +47,9 @@
 
                         <!-- Action Area -->
                         <div class="flex gap-2 items-center z-10">
-                            <!-- Pin/Unpin Form Toggle -->
+                            <!-- Pin/Unpin -->
                             <form action="{{ route('notes.togglePin', $note) }}" method="POST">
                                 @csrf
-                                <!-- Dynamic color switching: Orange if pinned, Grey if not -->
                                 <button type="submit"
                                     class="w-10 h-10 rounded-lg flex items-center justify-center transition {{ $note->is_pinned ? 'bg-orange-100 text-[#FF6F29] hover:bg-orange-200' : 'bg-gray-100 text-gray-400 hover:text-gray-600 hover:bg-gray-200' }}">
                                     <i class="ri-pushpin-fill"></i>
@@ -95,7 +76,9 @@
 
                     </div>
                 @empty
-                    <!-- Empty state -->
+                    <div class="col-span-1 md:col-span-3 text-center py-12 text-gray-400">
+                        <p class="text-sm font-medium">You haven't pinned any notes yet.</p>
+                    </div>
                 @endforelse
 
             </div>
